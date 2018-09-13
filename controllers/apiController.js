@@ -440,9 +440,13 @@ module.exports = function(app){
 
             });
 
-        }
+        }   
 
-            
+    });
+
+    app.get('/ct', function(req, res){
+
+        
 
     });
 
