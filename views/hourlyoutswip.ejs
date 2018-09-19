@@ -367,6 +367,7 @@
                                             <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
+                                    <!--
                                     <div class="box-body no-pad-top">
                                         <table id="hourly_outs" class="hourly-outs-table table-hover table-bordered">
                                             <tbody>
@@ -387,7 +388,7 @@
                                                     <th class="th-format">17:30 - 18:30</th>
                                                     <th class="th-format">Total</th>
                                                 </tr>
-                                                <% if(api_obj.data.search_date == '2018-09-12') { %>
+                                                <% if(api_obj.data) { %>
                                                 <% for(let i=0; i<api_obj.data.outs.process.length; i++){ %>
                                                     <tr>
                                                         <td id="plusminus" class="plusminus-<%= api_obj.data.outs.process[i].name %>" data-toggle="tooltip" title="Click to see outs per equipment"><span>+</span></td>
@@ -435,6 +436,7 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    -->
                                     <div classs="box-footer">
 
                                     </div>

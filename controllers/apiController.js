@@ -30,6 +30,8 @@ module.exports = function(app){
         res.header('Expires', '-1');
         res.header('Pragma', 'no-cache');
 
+
+
         if(req.userID && req.claim){
 
             let authenticity_token = jwt.sign({
@@ -39,6 +41,10 @@ module.exports = function(app){
                 }
             }, config.secret);
 
+            res.render('index', {username: req.claim.username, name: req.claim.name, department: req.claim.department, department: req.claim.department, authenticity_token});
+
+
+            /*
             function activity_feed(){
                 return new Promise(function(resolve, reject){
 
@@ -281,10 +287,7 @@ module.exports = function(app){
             }
 
             let humanizedGreeting = "Good " + getGreetingTime(moment()) + ", " +  req.claim.name + ".";
-
-            res.render('index', {username: req.claim.username, name: req.claim.name, department: req.claim.department, greet: humanizedGreeting, department: req.claim.department, authenticity_token});
-
-            /*
+            
             activity_feed().then(function(activity_feed_data){
 
                 function getGreetingTime (m) {
@@ -445,8 +448,102 @@ module.exports = function(app){
     });
 
     app.get('/ct', function(req, res){
-
         
+        let query_feed = {
+            filename: req.query.filename
+        };
+        
+        let authenticity_token = jwt.sign({
+            id: uuidv4(),
+            claim: {
+                signup: 'valid'
+            }
+        }, config.secret);
+        
+        function getGreetingTime (m) {
+            let g = null; //return g
+            
+            if(!m || !m.isValid()) { return; } //if we can't find a valid or filled moment, we return.
+            
+            let split_afternoon = 12 //24hr time to split the afternoon
+            let split_evening = 17 //24hr time to split the evening
+            let currentHour = parseFloat(m.format("HH"));
+            
+            if(currentHour >= split_afternoon && currentHour <= split_evening) {
+                g = "afternoon";
+            } else if(currentHour >= split_evening) {
+                g = "evening";
+            } else {
+                g = "morning";
+            }
+            
+            return g;
+        }
+
+        if(query_feed.filename){
+
+            function ct_feed(){
+                return new Promise(function(resolve, reject){
+                    
+                    console.log(query_feed);
+    
+                    fs.readFile('./public/feed/'+ query_feed.filename, {encoding:'utf8'}, function(err, data){
+                        if(err){return reject(err)};
+    
+                        if(data){
+                            let arr_data = data.split('\n');
+                            //console.log(arr_data);
+                            let feed_to_display = [];
+
+                            for(let i=0; i<arr_data.length;i++){
+                                let feed_bods = arr_data[i].split(',');
+
+                                if(feed_bods[i]){
+                                    feed_to_display.push({
+                                        date_time: moment(feed_bods[0],'dd/mm/yyyy hh:mm:ss').fromNow(),
+                                        date_only: moment(feed_bods[0], 'dd/mm/yyyy hh:mm:ss').format('LL'),
+                                        cluster_1: parseFloat(feed_bods[1]).toFixed(2),
+                                        cluster_2: parseFloat(feed_bods[2]).toFixed(2),
+                                        cluster_3: parseFloat(feed_bods[3]).toFixed(2),
+                                        cluster_4: parseFloat(feed_bods[4]).toFixed(2),
+                                        cluster_5: parseFloat(feed_bods[5]).toFixed(2),
+                                        total_ct: parseFloat(feed_bods[6]).toFixed(2)
+                                    });
+
+                                }
+
+                            }
+    
+                            let dashboard = {
+                                feed: feed_to_display,
+                            };
+    
+                            console.log(dashboard);
+                            resolve(dashboard);
+    
+                        } else {
+    
+                            let dashboard = [];
+    
+                            resolve(dashboard);
+    
+                        }
+                        
+                        
+                    });
+    
+                });
+            }
+    
+            ct_feed().then(function(dashboard){
+    
+                let humanizedGreeting = "Good " + getGreetingTime(moment()) + ".";
+                res.render('ct',{greet: humanizedGreeting, dashboard, authenticity_token, query_feed});
+
+            });
+
+        } 
+
 
     });
 
@@ -488,7 +585,7 @@ module.exports = function(app){
     });
 
     app.get('/hourly', function(req, res){
-        let pathHourly = './public/hourly.json';
+        let pathHourly = './public/hourlywipouts.json';
 
         function readJsonFile(){
             return new Promise(function(resolve, reject){
@@ -508,13 +605,133 @@ module.exports = function(app){
         }
 
         readJsonFile().then(function(api_obj){
-
             console.log(api_obj);
-            res.render('hourlyoutswip', {api_obj});
-
+            
+            res.send({api_obj});
         },  function(err){
             console.log(err);
         });
+    });
+
+    app.get('/lot', function(req, res){
+        
+        let query = {
+            type: req.query.type
+        }
+
+        let metaData = {
+            process: [{
+                name: "DAMAGE", limit: 3600*4, to: "POLY"
+            },{
+                name: "POLY", limit: 3600, to: "BSGDEP"
+            },{
+                name: "BSGDEP", limit: 3600, to: "NTM"
+            },{
+                name: "NTM", limit: 3600, to: "NOXE"
+            },{
+                name: "NOXE", limit: 3600, to: "NDEP"
+            },{
+                name: "NDEP", limit: 3600, to: "PTM"
+            },{
+                name: "PTM", limit: 3600, to: "TOXE"
+            },{
+                name: "TOXE", limit: 3600, to: "CLEANTEX"
+            },{
+                name: "CLEANTEX", limit: 3600, to: "PDRIVE"
+            },{
+                name: "PDRIVE", limit: 3600, to: "ARC_BARC"
+            },{
+                name: "ARC_BARC", limit: 3600, to: "PBA"
+            },{
+                name: "PBA", limit: 3600, to: "LCM"
+            },{
+                name: "LCM", limit: 3600, to: "SEED"
+            },{
+                name: "SEED", limit: 3600, to: "FGA"
+            },{
+                name: "FGA", limit: 3600, to: "PLM"
+            },{
+                name: "PLM", limit: 3600, to: "EDG_CTR"
+            },{
+                name: "EDG_CTR", limit: 3600, to: "PLATING"
+            },{
+                name: "PLATING", limit: 3600, to: "ETCHBK"
+            },{
+                name: "ETCHBK", limit: 3600, to: ""
+            },{
+                name: "HST", limit: 3600, to: ""
+            },{
+                name: "VISUAL", limit: 3600, to: ""
+            },{
+                name: "TEST", limit: 3600, to: ""
+            }]
+        }
+
+        let lot_list_path = './public/feed/lot_list.db';
+        
+        function read_lot_list(){
+            return new Promise(function(resolve, reject){
+                
+                fs.readFile(lot_list_path, {encoding: 'utf8'}, function(err, data){
+                    if(err){return reject(err)};
+                    
+                    if(data){
+                        let arr_data = (data.split('\n')).reverse();
+                        let feed_to_display = [];
+
+                        for(let i=0; i<arr_data.length; i++){ 
+                            let feed_bods = arr_data[i].split(',');
+
+                            if(arr_data[i]){
+
+                                for(let j=0; j<metaData.process.length; j++){
+                                    if(feed_bods[7] == metaData.process[j].name && feed_bods[1] >= metaData.process[j].limit){
+
+                                        feed_to_display.push({
+                                            lot_name: feed_bods[0],
+                                            duration: feed_bods[1],
+                                            line: feed_bods[3],
+                                            process_id: feed_bods[7],
+                                            current_qty: feed_bods[9],
+                                            comments: feed_bods[11],
+                                            created_date: feed_bods[12],
+                                            created_by: feed_bods[13]
+                                        });
+                                    }
+                                }
+                                
+
+                            }
+
+                        }
+
+                        resolve(feed_to_display);
+
+                    } else {
+
+                    }
+
+                });
+                
+
+            });
+        }
+
+        if(query.type == 'aging'){
+
+            read_lot_list().then(function(feed){
+
+                res.render('lot', {feed, metaData});
+
+            }, function(err){
+                console.log(err);
+            });
+
+        } else {
+
+        }
+
+
     });
 
     app.post('/api/hourly', function(req, res){

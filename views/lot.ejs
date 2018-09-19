@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="refresh" content="120">
-    <title>Tube Health | META</title>
+    <title>Aging Lots | META</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -290,7 +290,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
         <h1>
-            Tube Health
+            Aging Lots
             <small>dashboard</small>
         </h1>
         <ol class="breadcrumb">
@@ -301,168 +301,38 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-4">
-                    <p style="color:darkgray; font-weight: 300; margin: 0 0px 10px;"></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box dashboard-feed">
-                        <% if(dashboard.feed) { %>
-                            <% if(dashboard.tube_alerts.length >= 2) { %>
-                                <span class="info-box-icon bg-red dashboard-feed-logo"><i class="ion ion-ios-pricetag-outline"></i></span>
-                                <div class="info-box-content">
-                                <span class="info-box-text">Tube Alerts</span>
-                                <span class="info-box-number"><%= dashboard.tube_alerts.length %></span>
-                            <% } else if(dashboard.tube_alerts.length == 1) { %>
-                                <span class="info-box-icon bg-red dashboard-feed-logo"><i class="ion ion-ios-pricetag-outline"></i></span>
-                                <div class="info-box-content">
-                                <span class="info-box-text">Tube Alert</span>
-                                <span class="info-box-number"><%= dashboard.tube_alerts.length %></span>
-                            <% } else { %>
-                                <span class="info-box-icon bg-default dashboard-feed-logo"><i class="ion ion-ios-pricetag-outline"></i></span>
-                                <div class="info-box-content">
-                                <span class="info-box-text">Tube Alert</span>
-                                <span class="info-box-number">0</span>
-                            <% } %>
-                        <% } else { %>
-                            <span class="info-box-icon bg-default"><i class="ion ion-ios-pricetag-outline"></i></span>
-                            <div class="info-box-content">
-                            <span class="info-box-text">Tube Alert</span>
-                            <span class="info-box-number">0</span>
-                        <% } %>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box dashboard-feed">
-                        <% if(dashboard.feed) { %>
-                            <% if(dashboard.tube_warnings.length >= 2) { %>
-                                <span class="info-box-icon bg-yellow dashboard-feed-logo"><i class="ion ion-ios-bell-outline"></i></span>
-                                <div class="info-box-content">
-                                <span class="info-box-text">Tube Warnings</span>
-                                <span class="info-box-number"><%= dashboard.tube_warnings.length %></span>
-                            <% } else if(dashboard.tube_warnings.length == 1) { %>
-                                <span class="info-box-icon bg-yellow dashboard-feed-logo"><i class="ion ion-ios-bell-outline"></i></span>
-                                <div class="info-box-content">
-                                <span class="info-box-text">Tube Warning</span>
-                                <span class="info-box-number"><%= dashboard.tube_warnings.length %></span>
-                            <% } else { %>
-                                <span class="info-box-icon bg-default dashboard-feed-logo"><i class="ion ion-ios-bell-outline"></i></span>
-                                <div class="info-box-content">
-                                <span class="info-box-text">Tube Warning</span>
-                                <span class="info-box-number">0</span>
-                            <% } %>
-                        <% } else { %>
-                            <span class="info-box-icon bg-default"><i class="ion ion-ios-bell-outline"></i></span>
-                            <div class="info-box-content">
-                            <span class="info-box-text">Tube Warning</span>
-                            <span class="info-box-number">0</span>
-                        <% } %>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <p style="color:darkgray; font-weight: 300; margin: 0 0px 10px;"></p>
-                </div>
-            </div>
-            
-            <div class="row">
+                <% for(let k=0;k<metaData.process.length;k++) { %>
+                <% if(metaData.process[k].to) { %>
                 <div class="col-md-3">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">MRL feed</h3>
+                            <h3 class="box-title"><%= metaData.process[k].to %></h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
                             </div>
                         </div>
-                        <div class="box-body mrl-body">
-                            <% if(dashboard.feed) { %>
-                                <% for(let i=0; i<dashboard.feed.length; i++) { %>
-                                    <% if(dashboard.feed[i].process_name) { %>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="direct-chat-msg">
-                                                    <% if(dashboard.feed[i].info == 'Abort') { %>
-                                                        <div class="direct-chat-info clearfix">
-                                                            <span class="direct-chat-name pull-left">
-                                                                <span class="ion ion-ios-pricetag feed-activity-alert"></span>
-                                                                <%= dashboard.feed[i].eq_name %>
-                                                            </span>
-                                                            <span class="direct-chat-timestamp pull-right"><%= dashboard.feed[i].date_time %></span>
-                                                        </div>
-                                                        <!--
-                                                        <div class="direct-chat-img">
-                                                            <span class="ion ion-ios-pulse size-34"></span>
-                                                        </div>
-                                                        -->
-                                                        <div class="direct-chat-text mrl-text">
-                                                            <%= dashboard.feed[i].message %>
-                                                        </div>
-                                                    <% } else { %>
-                                                        <div class="direct-chat-info clearfix">
-                                                            <span class="direct-chat-name pull-left">
-                                                                <span class="ion ion-ios-bell feed-activity-warning"></span>
-                                                                <%= dashboard.feed[i].eq_name %>
-                                                            </span>
-                                                            <span class="direct-chat-timestamp pull-right"><%= dashboard.feed[i].date_time %></span>
-                                                        </div>
-                                                        <!--
-                                                        <div class="direct-chat-img">
-                                                            <span class="ion ion-ios-pulse size-34"></span>
-                                                        </div>
-                                                        -->
-                                                        <div class="direct-chat-text mrl-text">
-                                                            <%= dashboard.feed[i].message %>
-                                                        </div>
-                                                    <% } %>
-                                                    <!--
-                                                    <div class="box-header" style="position:initial;  padding: 4px 10px 0;">
-                                                        <h3 class="feed-activity-header"><%= dashboard.feed[i].message %></h3>
-                                                        
-                                                        <div class="box-tools pull-right">
-                                                                <button type="button" class="btn btn-link btn-flat dropdown-toggle" data-toggle="dropdown">
-                                                                    <span class="fa fa-ellipsis-v" style="color:slategray"></span>
-                                                                </button>
-                                                                <ul class="dropdown-menu coa-dropdown" role="menu">
-                                                                    <li>
-                                                                        <a href="#delete" data-toggle="collapse">Hide alert</a>
-                                                                    </li>
-                                                                </ul>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    -->
-                                                    <!---
-                                                    <div class="box-body feed-activity-user">
-                                                        @meta  
-                                                    </div>
-                                                    <div class="box-body feed-activity-body">
-                                                            <%= dashboard.feed[i].message %>
-                                                    </div>
-                                                    -->
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="box-body lot-dash"> <!-- -->
+                            <% if(feed) { %> 
+                                <% for(let i=0; i<feed.length; i++) { %>
+                                    <% if(feed[i].process_id == metaData.process[k].name) { %>
+                                        <p><%= feed[i].lot_name %> - <%= Math.round(((feed[i].duration)/3600)* 100)/100  %></p>
                                     <% } %>
                                 <% } %>
                             <% } else { %>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p style="text-align: center;color:rgb(199, 199, 199); font-weight: 300; margin: 0 -5px 10px;">No feed to display.</p>
-                                    </div>
-                                </div>
                             <% } %>
                         </div>
+                        <div class="box-footer">
+                        </div>
                     </div>
+                </div>
+                <% } %>
+                <% } %>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p style="color:darkgray; font-weight: 300; margin: 0 0px 10px;"></p>
                 </div>
             </div>
         </section>
