@@ -688,7 +688,7 @@ module.exports = function(app){
                                             duration: feed_bods[1],
                                             lot_name: feed_bods[3],
                                             from_line: feed_bods[4],
-                                            qty: feed_bods[5],
+                                            qty: parseFloat(feed_bods[5]),
                                             from_process_id: feed_bods[8],
                                             to_process_id: feed_bods[10],
                                             to_line: feed_bods[11],
@@ -707,7 +707,7 @@ module.exports = function(app){
                         }
 
                         resolve(feed_to_display);
-                        console.log(feed_to_display)
+                        //console.log(feed_to_display)
                         
 
                     } else {
