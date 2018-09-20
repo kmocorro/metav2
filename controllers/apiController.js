@@ -621,53 +621,47 @@ module.exports = function(app){
 
         let metaData = {
             process: [{
-                name: "DAMAGE", limit: 3600*4, to: "POLY"
+                name: "DAMAGE", limit: 100, to: "POLY"
             },{
-                name: "POLY", limit: 3600, to: "BSGDEP"
+                name: "POLY", limit: 100, to: "BSGDEP"
             },{
-                name: "BSGDEP", limit: 3600, to: "NTM"
+                name: "BSGDEP", limit: 100, to: "NTM"
             },{
-                name: "NTM", limit: 3600, to: "NOXE"
+                name: "NTM", limit: 100, to: "NOXE"
             },{
-                name: "NOXE", limit: 3600, to: "NDEP"
+                name: "NOXE", limit: 100, to: "NDEP"
             },{
-                name: "NDEP", limit: 3600, to: "PTM"
+                name: "NDEP", limit: 100, to: "PTM"
             },{
-                name: "PTM", limit: 3600, to: "TOXE"
+                name: "PTM", limit: 100, to: "TOXE"
             },{
-                name: "TOXE", limit: 3600, to: "CLEANTEX"
+                name: "TOXE", limit: 100, to: "CLEANTEX"
             },{
-                name: "CLEANTEX", limit: 3600, to: "PDRIVE"
+                name: "CLEANTEX", limit: 100, to: "PDRIVE"
             },{
-                name: "PDRIVE", limit: 3600, to: "ARC_BARC"
+                name: "PDRIVE", limit: 100, to: "ARC_BARC"
             },{
-                name: "ARC_BARC", limit: 3600, to: "PBA"
+                name: "ARC_BARC", limit: 100, to: "PBA"
             },{
-                name: "PBA", limit: 3600, to: "LCM"
+                name: "PBA", limit: 100, to: "LCM"
             },{
-                name: "LCM", limit: 3600, to: "SEED"
+                name: "LCM", limit: 100, to: "SEED"
             },{
-                name: "SEED", limit: 3600, to: "FGA"
+                name: "SEED", limit: 100, to: "FGA"
             },{
-                name: "FGA", limit: 3600, to: "PLM"
+                name: "FGA", limit: 100, to: "PLM"
             },{
-                name: "PLM", limit: 3600, to: "EDG_CTR"
+                name: "PLM", limit: 100, to: "EDG_CTR"
             },{
-                name: "EDG_CTR", limit: 3600, to: "PLATING"
+                name: "EDG_CTR", limit: 100, to: "PLATING"
             },{
-                name: "PLATING", limit: 3600, to: "ETCHBK"
+                name: "PLATING", limit: 100, to: "ETCHBK"
             },{
-                name: "ETCHBK", limit: 3600, to: ""
-            },{
-                name: "HST", limit: 3600, to: ""
-            },{
-                name: "VISUAL", limit: 3600, to: ""
-            },{
-                name: "TEST", limit: 3600, to: ""
+                name: "ETCHBK", limit: 100, to: ""
             }]
         }
 
-        let lot_list_path = './public/feed/lot_list.db';
+        let lot_list_path = './public/feed/file_lots.db';
         
         function read_lot_list(){
             return new Promise(function(resolve, reject){
@@ -682,30 +676,34 @@ module.exports = function(app){
                         for(let i=0; i<arr_data.length; i++){ 
                             let feed_bods = arr_data[i].split(',');
 
+                            //console.log(feed_bods);
+                            
                             if(arr_data[i]){
 
                                 for(let j=0; j<metaData.process.length; j++){
-                                    if(feed_bods[7] == metaData.process[j].name && feed_bods[1] >= metaData.process[j].limit){
+                                    if(feed_bods[8] == metaData.process[j].name && feed_bods[1] >= metaData.process[j].limit){
 
                                         feed_to_display.push({
-                                            lot_name: feed_bods[0],
+                                            date_time: feed_bods[0],
                                             duration: feed_bods[1],
-                                            line: feed_bods[3],
-                                            process_id: feed_bods[7],
-                                            current_qty: feed_bods[9],
-                                            comments: feed_bods[11],
-                                            created_date: feed_bods[12],
-                                            created_by: feed_bods[13]
+                                            lot_name: feed_bods[3],
+                                            from_line: feed_bods[4],
+                                            qty: feed_bods[5],
+                                            from_process_id: feed_bods[8],
+                                            to_process_id: feed_bods[10],
+                                            to_line: feed_bods[11],
+                                            comments: feed_bods[13]
                                         });
                                     }
                                 }
-                                
 
                             }
-
+                            
                         }
 
                         resolve(feed_to_display);
+                        //console.log(feed_to_display)
+                        
 
                     } else {
 
@@ -722,6 +720,7 @@ module.exports = function(app){
             read_lot_list().then(function(feed){
 
                 res.render('lot', {feed, metaData});
+                //console.log(feed);
 
             }, function(err){
                 console.log(err);

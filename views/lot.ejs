@@ -316,7 +316,7 @@
                         <div class="box-body lot-dash"> <!-- -->
                             <% if(feed) { %> 
                                 <% for(let i=0; i<feed.length; i++) { %>
-                                    <% if(feed[i].process_id == metaData.process[k].name) { %>
+                                    <% if(metaData.process[k].to == feed[i].to_process_id) { %>
                                         <p><%= feed[i].lot_name %> - <%= Math.round(((feed[i].duration)/3600)* 100)/100  %></p>
                                     <% } %>
                                 <% } %>
