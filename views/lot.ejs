@@ -324,8 +324,8 @@
                                                 <div class="direct-chat-msg">
                                                     <div class="direct-chat-info clearfix">
                                                         <span class="direct-chat-name pull-left">
-                                                            <span class="ion ion-ios-pricetag feed-activity-alert"></span>
-                                                                <%= feed[i].lot_name %>
+                                                            <!--<span class="ion ion-ios-pricetag feed-activity-alert"></span>-->
+                                                                <%= feed[i].date_time %>
                                                         </span>
                                                         <span class="direct-chat-timestamp pull-right"><%= Math.round(((feed[i].duration)/3600)* 100)/100  %></span>
                                                     </div>
@@ -335,7 +335,7 @@
                                                         </div>
                                                         -->
                                                     <div class="direct-chat-text mrl-text">
-                                                        
+                                                        <%= feed[i].lot_name %>
                                                     </div>
                                                 </div>
                                             </div>
