@@ -694,6 +694,11 @@ module.exports = function(app){
                                             to_line: feed_bods[11],
                                             comments: feed_bods[13]
                                         });
+
+                                        // sort :D
+                                        feed_to_display.sort(function(a, b) {
+                                            return b.duration - a.duration;
+                                        });
                                     }
                                 }
 
@@ -702,7 +707,7 @@ module.exports = function(app){
                         }
 
                         resolve(feed_to_display);
-                        //console.log(feed_to_display)
+                        console.log(feed_to_display)
                         
 
                     } else {
