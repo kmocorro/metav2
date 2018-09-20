@@ -390,7 +390,7 @@ module.exports = function(app){
                             for(let i=0; i<arr_data.length;i++){
                                 let feed_bods = arr_data[i].split(',');
 
-                                if(feed_bods[i]){
+                                if(arr_data[i]){
                                     feed_to_display.push({
                                         date_time: moment(feed_bods[0], 'mm/dd/yyyy hh:mm:s').calendar(),
                                         process_name: feed_bods[1],
