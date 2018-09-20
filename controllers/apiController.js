@@ -684,7 +684,7 @@ module.exports = function(app){
                                     if(feed_bods[8] == metaData.process[j].name && feed_bods[1] >= metaData.process[j].limit){
 
                                         feed_to_display.push({
-                                            date_time: feed_bods[0],
+                                            date_time: moment(feed_bods[0]).calendar(),
                                             duration: feed_bods[1],
                                             lot_name: feed_bods[3],
                                             from_line: feed_bods[4],
