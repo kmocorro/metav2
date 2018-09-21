@@ -724,7 +724,9 @@ module.exports = function(app){
 
             read_lot_list().then(function(feed){
 
-                res.render('lot', {feed, metaData});
+                let expireDate = moment('2018-09-27 11:00:00').fromNow();
+
+                res.render('lot', {feed, metaData, expireDate});
                 //console.log(feed);
 
             }, function(err){
