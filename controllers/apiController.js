@@ -604,10 +604,11 @@ module.exports = function(app){
             });
         }
 
-        readJsonFile().then(function(api_obj){
-            console.log(api_obj);
+        readJsonFile().then(function(api_object_from_MES){
+
+            let api_obj = api_object_from_MES;
             
-            res.send({api_obj});
+            res.render('hourlyoutswip',{api_obj});
         },  function(err){
             console.log(err);
         });
@@ -695,7 +696,7 @@ module.exports = function(app){
                                             comments: feed_bods[13]
                                         });
 
-                                        // sort :D
+                                        // sort :D highest to lowesssst
                                         feed_to_display.sort(function(a, b) {
                                             return b.duration - a.duration;
                                         });
