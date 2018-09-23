@@ -99,7 +99,7 @@ module.exports = function(app){
 
                                 // send email notification.
                                 let mailSettings = {
-                                    from: '"Automailer" <' + mailer.mail.auth.user + '>',
+                                    from: '"Automailer" <f4automailer@sunpowercorp.com>',
                                     to: verifiedClaim.email,
                                     subject: 'Welcome to META!',
                                     html: '<p>Hello ' + verifiedClaim.firstname + ', <br><br> Thanks for joining META! <br><br>You may now use your username <b>'+ verifiedClaim.username +'</b> to upload your activites, view reports and more. <br><br>To continue to META, Here\'s the link: http://'+ approver.admin.ip +' <br><br> Thanks </p>'
@@ -300,7 +300,7 @@ module.exports = function(app){
                                     
                                     // mail settings
                                     let mailSettings = {
-                                        from: '"Automailer" <fab4automailer@sunpowercorp.com>',
+                                        from: '"Automailer" <f4automailer@sunpowercorp.com>',
                                         to: approver.admin.email,
                                         subject: 'Verify Email Address for META',
                                         html: '<p>Hey ' + approver.admin.name + ', <br><br> As an admintrator of META, We\'d like to know if you want to accept <b>' + signup_credentials.email + '</b> as a new user. <br><br><table style="border: 1px solid gray; padding:2px;"><tr ><th style="border: 1px solid gray; padding:2px;">Firstname</th><th style="border: 1px solid gray; padding:2px;">Lastname</th><th style="border: 1px solid gray; padding:2px;">Username</th><th style="border: 1px solid gray; padding:2px;">Email</th><th style="border: 1px solid gray; padding:2px;">Department</th></tr><tr><td style="border: 1px solid gray; padding:2px;">'+ signup_credentials.firstname +'</td><td style="border: 1px solid gray; padding:2px;">'+ signup_credentials.lastname +'</td><td style="border: 1px solid gray; padding:2px;">'+ signup_credentials.username +'</td><td style="border: 1px solid gray; padding:2px;">'+ signup_credentials.email +'</td><td style="border: 1px solid gray; padding:2px;">'+ signup_credentials.department +'</td></tr></table><br>Click below to verify the email address: <br><br><a href="http://' + approver.admin.ip + '/verifysignup?token=' + signupVerificationToken + '" target="_blank">Verify Email Address</a>. <br><br> If you don\'t want to accept, just ignore this email. <br><br> Thanks! </p>'
@@ -517,7 +517,7 @@ module.exports = function(app){
 
                                         // mail settings
                                         let mailSettings = {
-                                            from: '"Automailer" <' + mailer.mail.auth.user + '>',
+                                            from: '"Automailer" <f4automailer@sunpowercorp.com>',
                                             to: payload.email,
                                             subject: 'Password Reset Request for META',
                                             html: '<p>Hi ' + payload.name + ', <br><br> Your META password can be reset by clicking the link below. <br>If you did not request a new password, please ignore this email. <br><br><a href="http://'+ approver.admin.ip  +'/reset?token=' + resetpass_token + '" target="_blank">Reset Password</a>. <br><br> Thanks! </p>'
@@ -604,7 +604,7 @@ module.exports = function(app){
 
                                     // send email notification.
                                     let mailSettings = {
-                                        from: '"Automailer" <' + mailer.mail.auth.user + '>',
+                                        from: '"Automailer" <f4automailer@sunpowercorp.com>',
                                         to: resetClaim.email,
                                         subject: 'Password Change Notification',
                                         html: '<p>Hello ' + resetClaim.name + ', <br><br> Password has been successfully changed. <br>You may now use your new password. To continue to META, Here\'s the link: http://'+ approver.admin.ip +' <br><br> Thanks </p>'
