@@ -307,6 +307,8 @@ module.exports = function(app){
                                     }
 
                                     transporter.sendMail(mailSettings, function(error, info){
+                                        console.log(error);
+                                        console.log(info);
                                         if(error){ return res.send({err: '<center>Oops, there is a problem folding the email.<br> Please try it again. </center>'})};
                                         res.send({auth: '<center>Success!<br> We\'ll send an email once account has been approved.</center>'});
                                     });
