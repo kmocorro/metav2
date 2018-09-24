@@ -352,9 +352,17 @@
                                                     <div class="direct-chat-info clearfix">
                                                         <span class="direct-chat-name pull-left">
                                                             <!--<span class="ion ion-ios-pricetag feed-activity-alert"></span>-->
-                                                            <%= feed[i].lot_name %> 
+                                                            <a href="#"><%= feed[i].lot_name %></a>
                                                         </span>
-                                                        <span class="direct-chat-timestamp pull-right"><%= Math.round(((feed[i].duration)/3600)* 100)/100  %></span>
+                                                        <% if(metaData.process[k].limit <= Math.round(((feed[i].duration)/3600)* 100)/100) { %>
+                                                        <span class="badge bg-red direct-chat-timestamp pull-right">
+                                                            <%= Math.round(((feed[i].duration)/3600)* 100)/100  %>
+                                                        </span>
+                                                        <% } else { %>
+                                                        <span class="badge bg-gray direct-chat-timestamp pull-right">
+                                                            <%= Math.round(((feed[i].duration)/3600)* 100)/100  %>
+                                                        </span>
+                                                        <% } %>
                                                     </div>
                                                     <!--
                                                     <div class="direct-chat-img">
@@ -375,13 +383,6 @@
                             <% } %>
                         </div>
                         <div class="box-footer with-border">
-                            <% for(let j=0; j<wip.length;j++) { %>
-                                <% if(metaData.process[k].to == wip[j].to) { %>
-                                    <div class="pull-right">
-                                        <small><span class="text-orange"><i class="fa fa-shopping-cart"></i> <%= wip[j].qty %></span></small>   
-                                    </div>
-                                <% } %>
-                            <% } %>
                         </div>
                     </div>
                 </div>

@@ -622,43 +622,43 @@ module.exports = function(app){
 
         let metaData = {
             process: [{
-                name: "DAMAGE", limit: 100, to: "POLY"
+                name: "DAMAGE", limit: 5, to: "POLY"
             },{
-                name: "POLY", limit: 100, to: "BSGDEP"
+                name: "POLY", limit: 2, to: "BSGDEP"
             },{
-                name: "BSGDEP", limit: 100, to: "NTM"
+                name: "BSGDEP", limit: 2, to: "NTM"
             },{
-                name: "NTM", limit: 100, to: "NOXE"
+                name: "NTM", limit: 2, to: "NOXE"
             },{
-                name: "NOXE", limit: 100, to: "NDEP"
+                name: "NOXE", limit: 4, to: "NDEP"
             },{
-                name: "NDEP", limit: 100, to: "PTM"
+                name: "NDEP", limit: 2, to: "PTM"
             },{
-                name: "PTM", limit: 100, to: "TOXE"
+                name: "PTM", limit: 2, to: "TOXE"
             },{
-                name: "TOXE", limit: 100, to: "CLEANTEX"
+                name: "TOXE", limit: 2, to: "CLEANTEX"
             },{
-                name: "CLEANTEX", limit: 100, to: "PDRIVE"
+                name: "CLEANTEX", limit: 4.5, to: "PDRIVE"
             },{
-                name: "PDRIVE", limit: 100, to: "ARC_BARC"
+                name: "PDRIVE", limit: 2, to: "ARC_BARC"
             },{
-                name: "ARC_BARC", limit: 100, to: "PBA"
+                name: "ARC_BARC", limit: 1.5, to: "PBA"
             },{
-                name: "PBA", limit: 100, to: "LCM"
+                name: "PBA", limit: 2, to: "LCM"
             },{
-                name: "LCM", limit: 100, to: "SEED"
+                name: "LCM", limit: 3, to: "SEED"
             },{
-                name: "SEED", limit: 100, to: "FGA"
+                name: "SEED", limit: 2, to: "FGA"
             },{
-                name: "FGA", limit: 100, to: "PLM"
+                name: "FGA", limit: 2, to: "PLM"
             },{
-                name: "PLM", limit: 100, to: "EDG_CTR"
+                name: "PLM", limit: 2, to: "EDG_CTR"
             },{
-                name: "EDG_CTR", limit: 100, to: "PLATING"
+                name: "EDG_CTR", limit: 2, to: "PLATING"
             },{
-                name: "PLATING", limit: 100, to: "ETCHBK"
+                name: "PLATING", limit: 1, to: "ETCHBK"
             },{
-                name: "ETCHBK", limit: 100, to: ""
+                name: "ETCHBK", limit: 2, to: ""
             }]
         }
 
@@ -687,7 +687,7 @@ module.exports = function(app){
 
                                 for(let j=0; j<metaData.process.length; j++){
 
-                                    if(feed_bods[8] == metaData.process[j].name && feed_bods[1] >= metaData.process[j].limit){
+                                    if(feed_bods[8] == metaData.process[j].name){
 
                                         feed_to_display.push({
                                             date_time: moment(feed_bods[0]).calendar(),
