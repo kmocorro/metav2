@@ -333,11 +333,8 @@
                 <div class="col-md-3">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <% for(let j=0; j<wip.length;j++) { %>
-                                <% if(metaData.process[k].to == wip[j].to) { %>
-                                <h3 class="box-title"><%= metaData.process[k].to %> - <%= wip[j].qty %></h3>
-                                <% } %>
-                            <% } %>
+                            <h3 class="box-title"><%= metaData.process[k].to %></h3> 
+                            
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
@@ -375,7 +372,14 @@
                                 
                             <% } %>
                         </div>
-                        <div class="box-footer">
+                        <div class="box-footer with-border">
+                            <% for(let j=0; j<wip.length;j++) { %>
+                                <% if(metaData.process[k].to == wip[j].to) { %>
+                                    <div class="pull-right">
+                                        <small><span class="text-orange"><i class="fa fa-shopping-cart"></i> <%= wip[j].qty %></span></small>   
+                                    </div>
+                                <% } %>
+                            <% } %>
                         </div>
                     </div>
                 </div>
