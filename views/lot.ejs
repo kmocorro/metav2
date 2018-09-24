@@ -333,8 +333,11 @@
                 <div class="col-md-3">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><%= metaData.process[k].to %></h3>
-                            
+                            <% for(let j=0; j<wip.length;j++) { %>
+                                <% if(metaData.process[k].to == wip[j].to) { %>
+                                <h3 class="box-title"><%= metaData.process[k].to %> - <%= wip[j].qty %></h3>
+                                <% } %>
+                            <% } %>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>

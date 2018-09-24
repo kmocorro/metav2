@@ -663,6 +663,10 @@ module.exports = function(app){
         }
 
         let lot_list_path = './public/feed/file_lots.db';
+
+        function add(){
+            return a + b;
+        }
         
         function read_lot_list(){
             return new Promise(function(resolve, reject){
@@ -673,15 +677,16 @@ module.exports = function(app){
                     if(data){
                         let arr_data = (data.split('\n')).reverse();
                         let feed_to_display = [];
+                        let wipPerProcess = [];
 
                         for(let i=0; i<arr_data.length; i++){ 
                             let feed_bods = arr_data[i].split(',');
-
                             //console.log(feed_bods);
                             
                             if(arr_data[i]){
 
                                 for(let j=0; j<metaData.process.length; j++){
+
                                     if(feed_bods[8] == metaData.process[j].name && feed_bods[1] >= metaData.process[j].limit){
 
                                         feed_to_display.push({
@@ -700,6 +705,7 @@ module.exports = function(app){
                                         feed_to_display.sort(function(a, b) {
                                             return b.duration - a.duration;
                                         });
+
                                     }
                                 }
 
@@ -707,7 +713,27 @@ module.exports = function(app){
                             
                         }
 
-                        resolve(feed_to_display);
+                        for(let i=0; i<metaData.process.length; i++){
+                            if(metaData.process[i].to){
+                                wipPerProcess.push(
+                                    (feed_to_display.filter(process => process.to_process_id == metaData.process[i].to)).reduce(function(prev, curr){
+                                       return {
+                                           to: metaData.process[i].to,
+                                           qty: prev.qty + curr.qty
+                                       }
+                                    })
+                                );
+                            }
+                        }
+                        
+                        let toGo = {
+                            feed: feed_to_display,
+                            wip: wipPerProcess
+                        }
+
+                        //console.log(toGo.wip);
+
+                        resolve(toGo);
                         //console.log(feed_to_display)
                         
 
@@ -723,11 +749,14 @@ module.exports = function(app){
 
         if(query.type == 'aging'){
 
-            read_lot_list().then(function(feed){
+            read_lot_list().then(function(toGo){
+
+                let feed = toGo.feed;
+                let wip = toGo.wip;
 
                 let expireDate = moment('2018-09-27 11:00:00').fromNow();
 
-                res.render('lot', {feed, metaData, expireDate});
+                res.render('lot', {feed, wip, metaData, expireDate});
                 //console.log(feed);
 
             }, function(err){
