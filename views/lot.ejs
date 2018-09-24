@@ -233,9 +233,22 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="/hourly"><i class="fa fa-circle-o"></i> Hourly WIP & Outs</a></li>
-                <li class="active"><a href="/lot?type=aging"><i class="fa fa-circle-o"></i> Aging Lots</a></li>
-                <li><a href="/th?filename=ndep.txt"><i class="fa fa-circle-o"></i> Tube Health</a></li>
+                <li><a href="/hourly"><i class="ion ion-ios-close-outline" style="color:red;"></i> Hourly WIP & Outs </a></li>
+                <li class="active"><a href="/lot?type=aging"><i class="ion ion-ios-checkmark-outline" style="color:green;"></i> Aging Lots </a></li>
+                <li><a href="/th?filename=ndep.txt"><i class="ion ion-ios-checkmark-outline" style="color:green;"></i> Tube Health </a></li>
+            </ul>
+            </li>
+
+            <li class="treeview">
+            <a href="#">
+                <i class="fa fa-edit"></i> <span>Prototype</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/coa"><i class="ion ion-ios-checkmark-outline" style="color:green;"></i> Certificate of Analysis </a></li>
+                <li><a href="/activity"><i class="ion ion-ios-checkmark-outline" style="color:green;"></i> Engineering Activity </a></li>
             </ul>
             </li>
             <!---
@@ -292,10 +305,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-        <h1>
+        <h1><i class="ion ion-ios-checkmark-outline" style="color:green;"></i>
             Aging Lots
             <small>dashboard</small>
-            <label class="label label-success">Online</label>
+            <small><label class="label label-success">active</label></small>
         </h1>
 
         <ol class="breadcrumb">

@@ -419,7 +419,7 @@ module.exports = function(app){
                                 tube_warnings
                             };
     
-                            console.log(dashboard);
+                            //console.log(dashboard);
                             resolve(dashboard);
     
                         } else {
@@ -485,7 +485,7 @@ module.exports = function(app){
             function ct_feed(){
                 return new Promise(function(resolve, reject){
                     
-                    console.log(query_feed);
+                    //console.log(query_feed);
     
                     fs.readFile('./public/feed/'+ query_feed.filename, {encoding:'utf8'}, function(err, data){
                         if(err){return reject(err)};
@@ -518,7 +518,7 @@ module.exports = function(app){
                                 feed: feed_to_display,
                             };
     
-                            console.log(dashboard);
+                            //console.log(dashboard);
                             resolve(dashboard);
     
                         } else {
@@ -745,7 +745,7 @@ module.exports = function(app){
         let form = new formidable.IncomingForm();
 
         form.parse(req, function(err, fields){
-            console.log(fields);
+            //console.log(fields);
         });
     });
 
@@ -945,7 +945,7 @@ module.exports = function(app){
                         }
 
                         connection.release();
-                        res.render('coa-main', {username: req.claim.username, department: req.claim.department, data, authenticity_token, todayDate});
+                        res.render('coa', {username: req.claim.username, name: req.claim.name, department: req.claim.department, data, authenticity_token, todayDate});
 
 
                     },  function(err){
@@ -1153,13 +1153,13 @@ module.exports = function(app){
                     return activity().then(function(data){
 
                             let todayDate = moment(new Date()).format('lll');
-                            res.render('activity', { username: req.claim.username, department: req.claim.department, authenticity_token,  data, todayDate, process_list});
+                            res.render('activity', { username: req.claim.username, name: req.claim.name, department: req.claim.department, authenticity_token,  data, todayDate, process_list});
 
                             connection.release();
 
                         },  function(data){
                             let todayDate = moment(new Date()).format('lll');
-                            res.render('activity', { username: req.claim.username, department: req.claim.department, authenticity_token, data, todayDate, process_list});
+                            res.render('activity', { username: req.claim.username, name: req.claim.name, department: req.claim.department, authenticity_token, data, todayDate, process_list});
                             
                             connection.release();
                         });
