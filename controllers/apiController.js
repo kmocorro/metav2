@@ -663,10 +663,6 @@ module.exports = function(app){
         }
 
         let lot_list_path = './public/feed/file_lots.db';
-
-        function add(){
-            return a + b;
-        }
         
         function read_lot_list(){
             return new Promise(function(resolve, reject){
@@ -761,6 +757,73 @@ module.exports = function(app){
 
             }, function(err){
                 console.log(err);
+            });
+
+        } else {
+
+            res.send('Wrong query.');
+        }
+
+
+    });
+
+    app.get('/perlot', function(req, res){
+        let query = {
+            lot: req.query.name
+        }
+
+        function lotHistory(){
+            return new Promise(function(resolve, reject){
+
+                mysql.poolMES.getConnection(function(err, connection){
+                    if(err){return reject(err)};
+
+                    connection.query({
+                        sql: 'SET time_zone = "+08:00"; SELECT b.lot_name, a.* FROM MES_LOT_TRACKING a JOIN MES_LOTS b ON a.lot_id = b.lot_id WHERE b.lot_name = ? ORDER BY lot_track_id DESC',
+                        values: [query.lot]
+                    },  function(err, results){
+                        if(err){return reject(err)};
+
+                        if(typeof results[1] !== 'undefined' && results[1] !== null && results.length > 0){
+                            let lot_history_obj = [];
+
+                            for(let i=0; i<results[1].length; i++){
+
+                                lot_history_obj.push({
+                                    created_date: moment(results[1][i].created_date).format('lll'),
+                                    lot_name: results[1][i].lot_name,
+                                    line: results[1][i].line,
+                                    status_id: results[1][i].status_id,
+                                    process_id: results[1][i].process_id,
+                                    start_qty: results[1][i].start_qty,
+                                    current_qty: results[1][i].current_qty,
+                                    comments: results[1][i].comments,
+                                    created_by: results[1][i].created_by
+                                });
+                            }
+
+                            resolve(lot_history_obj);
+                        } else {
+                            resolve(lot_history_data);
+                        }
+
+                    });
+
+                    connection.release();
+
+                });
+
+            });
+        }
+
+        if(query.lot){
+
+            let searched_lot = query.lot;
+
+            lotHistory().then(function(lot_history_data){
+                res.render('perlot', { searched_lot, lot_history_data});
+            },  function(err){
+                res.render('perlot', { searched_lot, lot_history_data});
             });
 
         } else {

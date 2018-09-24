@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="refresh" content="120">
-    <title>Aging Lots | META</title>
+    <title><%= searched_lot %> | META</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -15,11 +14,15 @@
     <link rel="stylesheet" href="../assets/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../assets/dist/css/AdminLTE.min.css">
+    <!-- Data tables-->
+    <link rel="stylesheet" href="../assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
         folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../assets/dist/css/skins/_all-skins.min.css">
     <!--FAB4-->
     <link rel="stylesheet" href="../assets/dist/css/fab4meta.css">
+    <!-- Plotly JS-->
+    <script src="../charts/plotly.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,7 +40,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="../assets/index2.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>F</b>M</span>
         <!-- logo for regular state and mobile devices -->
@@ -218,13 +221,6 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <!--
-            <li>
-                <a href="#">
-                    <i class="fa fa-home"></i> <span>Home</span>
-                </a>
-            </li>
-            -->
             <li class="treeview active">
             <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -234,7 +230,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="/hourly"><i class="ion ion-ios-close-outline" style="color:red;"></i> Hourly WIP & Outs </a></li>
-                <li class="active"><a href="/lot?type=aging"><i class="ion ion-ios-checkmark-outline" style="color:green;"></i> Aging Lots </a></li>
+                <li><a href="/lot?type=aging"><i class="ion ion-ios-checkmark-outline" style="color:green;"></i> Aging Lots </a></li>
                 <li><a href="/th?filename=ndep.txt"><i class="ion ion-ios-checkmark-outline" style="color:green;"></i> Tube Health </a></li>
             </ul>
             </li>
@@ -248,10 +244,9 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="/coa"><i class="ion ion-ios-checkmark-outline" style="color:green;"></i> Certificate of Analysis </a></li>
-                <li><a href="/activity"><i class="ion ion-ios-checkmark-outline" style="color:green;"></i> Engineering Activity </a></li>
             </ul>
             </li>
-            <!---
+            <!--
             <li class="treeview">
             <a href="#">
                 <i class="fa fa-pie-chart"></i>
@@ -288,11 +283,11 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> Certificate of Analysis</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Certificate of Analysis</a></li>
             </ul>
             </li>
             <li class="header">SUPPORT</li>
-            <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+            <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
             -->
         </ul>
         </section>
@@ -305,95 +300,66 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-        <h1><i class="ion ion-ios-checkmark-outline" style="color:green;"></i>
-            Aging Lots
-            <small>dashboard</small>
+        <h1>
+            Lot Tracker
+            <small>prototype</small>
             <small><label class="label label-success">active</label></small>
-            <small>refresh rate</small>
-            <small><label class="label label-danger">- 15 min.</label> </small>
         </h1>
-
         <ol class="breadcrumb">
-            <li class="active"><a href="/lot?type=aging"><i class="fa fa-dashboard"></i> Aging Lots</a></li>
+            <li class="active"><a href="#"><i class="fa fa-dashboard"></i> <%= searched_lot %></a></li>
         </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
+            
             <div class="row">
                 <div class="col-md-12">
-                    <div class="alert alert-info alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <i class="icon fa fa-warning"></i>
-                        This prototype will expire <b><%= expireDate %></b>. Please attend to our meeting for further discussion.
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <% for(let k=0;k<metaData.process.length;k++) { %>
-                <% if(metaData.process[k].to) { %>
-                <div class="col-md-3">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><%= metaData.process[k].to %></h3> 
-                            
+                            <h3 class="box-title"><%= searched_lot %></h3>
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
                             </div>
                         </div>
-                        <div class="box-body lot-dash"> <!-- -->
-                            <% if(feed) { %> 
-                                <% for(let i=0; i<feed.length; i++) { %>
-                                    <% if(metaData.process[k].to == feed[i].to_process_id) { %>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="direct-chat-msg">
-                                                    <div class="direct-chat-info clearfix">
-                                                        <span class="direct-chat-name pull-left">
-                                                            <!--<span class="ion ion-ios-pricetag feed-activity-alert"></span>-->
-                                                            <a href="/perlot?name=<%= feed[i].lot_name %>" target="_blank"><%= feed[i].lot_name %></a>
-                                                        </span>
-                                                        <% if(metaData.process[k].limit <= Math.round(((feed[i].duration)/3600)* 100)/100) { %>
-                                                        <span class="badge bg-red direct-chat-timestamp pull-right">
-                                                            <%= Math.round(((feed[i].duration)/3600)* 100)/100  %>
-                                                        </span>
-                                                        <% } else { %>
-                                                        <span class="badge bg-gray direct-chat-timestamp pull-right">
-                                                            <%= Math.round(((feed[i].duration)/3600)* 100)/100  %>
-                                                        </span>
-                                                        <% } %>
-                                                    </div>
-                                                    <!--
-                                                    <div class="direct-chat-img">
-                                                        <span class="ion ion-ios-pulse size-34"></span>
-                                                    </div>
-                                                    
-                                                    <div class="direct-chat-text mrl-text">
-                                                    </div>
-                                                    -->
-                                                    <hr class="hr-class"/>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="box-body">
+                            <table id="perlot" class="perlot-table table-striped table-bordered" >
+                                <tr>
+                                    <th class="th-format">Created date</th>
+                                    <th class="th-format">Line</th>
+                                    <th class="th-format">Lot name</th>
+                                    <th class="th-format">Lot status</th>
+                                    <th class="th-format">Process</th>
+                                    <th class="th-format">Start qty</th>
+                                    <th class="th-format">Current qty</th>
+                                    <th class="th-format-comments">Comments</th>
+                                    <th class="th-format">Created by</th>
+                                </tr>
+                                <% if(lot_history_data) { %>
+                                    <% for(let i=0; i<lot_history_data.length;i++) { %>
+                                    <tr>
+                                    <td class="td-format-process-data"><%= lot_history_data[i].created_date %></td>
+                                    <td class="td-format-process-data"><%= lot_history_data[i].line %></td>
+                                    <td class="td-format-process-data"><%= lot_history_data[i].lot_name %></td>
+                                    <td class="td-format-process-data"><%= lot_history_data[i].status_id %></td>
+                                    <td class="td-format-process-data"><%= lot_history_data[i].process_id %></td>
+                                    <td class="td-format-process-data"><%= lot_history_data[i].start_qty %></td>
+                                    <td class="td-format-process-data"><%= lot_history_data[i].current_qty %></td>
+                                    <td class="td-format-process-data"><%= lot_history_data[i].comments %></td>
+                                    <td class="td-format-process-data"><%= lot_history_data[i].created_by %></td>
+                                    </tr>
                                     <% } %>
                                 <% } %>
-                            <% } else { %>
-                                
-                            <% } %>
+                            </table>
                         </div>
-                        <div class="box-footer with-border">
+                        <div class="box-footer">
+
                         </div>
                     </div>
                 </div>
-                <% } %>
-                <% } %>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <p style="color:darkgray; font-weight: 300; margin: 0 0px 10px;"></p>
-                </div>
-            </div>
+
         </section>
         <!-- /.content -->
     </div>
@@ -403,7 +369,7 @@
         <div class="pull-right hidden-xs">
         <b>Version</b> 1.0.0
         </div>
-        <strong>M E T A</strong> - Manufacturing & Engineering Tool App
+        <strong>M E T A</strong> - Manufacturing and Engineering Tool App
     </footer>
 
     <!-- Control Sidebar -->
@@ -607,16 +573,26 @@
 <script src="../assets/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="../assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Data tables-->
+<script src="../assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
 <script src="../assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="../assets/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="../assets/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../assets/dist/js/demo.js"></script>
 <script>
-  window.addEventListener('load', function() {
-    $('.sidebar-menu').tree();
-  });
+  $(document).ready(function () {
+    $('.sidebar-menu').tree()
+  })
+</script>
+<script>
+    $(function(){
+        $('#perlot').DataTable();
+    });
 </script>
 </body>
 </html>
