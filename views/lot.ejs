@@ -368,11 +368,11 @@
                                                             <a href="/perlot?name=<%= feed[i].lot_name %>" target="_blank"><%= feed[i].lot_name %></a>
                                                         </span>
                                                         <% if(metaData.process[k].limit <= Math.round(((feed[i].duration)/3600)* 100)/100) { %>
-                                                        <span class="badge bg-red direct-chat-timestamp pull-right">
+                                                        <span class="text-red direct-chat-timestamp pull-right">
                                                             <%= Math.round(((feed[i].duration)/3600)* 100)/100  %>
                                                         </span>
                                                         <% } else { %>
-                                                        <span class="badge bg-gray direct-chat-timestamp pull-right">
+                                                        <span class="text-gray direct-chat-timestamp pull-right">
                                                             <%= Math.round(((feed[i].duration)/3600)* 100)/100  %>
                                                         </span>
                                                         <% } %>
