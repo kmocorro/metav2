@@ -220,6 +220,7 @@
         </form>
         -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
+        
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <!--
@@ -255,6 +256,7 @@
                 <li><a href="/activity"><i class="ion ion-ios-checkmark-outline" style="color:green;"></i> Engineering Activity </a></li>
             </ul>
             </li>
+            
             <!---
             <li class="treeview">
             <a href="#">
@@ -299,6 +301,13 @@
             <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
             -->
         </ul>
+        
+        <!--reminder ad-->
+        <div id="reminder-ad" class="show color_5">
+            <p class="reminder-ad-p">Hello Fab4,</p>
+            <p class="reminder-ad-p">This app is a platform for prototypes. Any issues, downtime and delays are expected.</p>
+            <p class="reminder-ad-p">Thank you! ❤️</p>
+        </div>
         </section>
         <!-- /.sidebar -->
     </aside>
@@ -326,10 +335,10 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="alert alert-success alert-dismissible">
+                    <div class="alert alert-info alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <i class="icon fa fa-check"></i>
-                        New feature available! "<b>Lot tracker</b>" Click lot name you want and it will automatically redirect you to its history.
+                        <i class="icon fa fa-warning"></i>
+                        This prototype will expire <b><%= expireDate %></b>. Please attend to our meeting for further discussion.
                     </div>
                 </div>
             </div>
