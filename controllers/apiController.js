@@ -1075,7 +1075,7 @@ module.exports = function(app){
 
                 } else if(reportQuery == 'cycletime'){
 
-                    res.render('reports', {username: 'Guest', url_query: 'http://tableau.sunpowercorp.com/#/site/MES_MANILA/views/Fab4CycleTime/Fab4CycleTime?:iid=1'});
+                    res.render('reports', {username: 'Guest', url_query: 'http://tableau.sunpowercorp.com/#/site/MES_MANILA/views/Fab4Cycletimev2/OverallCycletime?:iid=6'});
 
                 } else if(reportQuery == 'cycletime-cluster-1'){
 
