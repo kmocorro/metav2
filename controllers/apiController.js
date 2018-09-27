@@ -752,8 +752,9 @@ module.exports = function(app){
 
                 let expireDate = moment('2018-09-27 11:00:00').fromNow();
 
-                res.render('lot', {feed, wip, metaData, expireDate});
+                //res.render('lot', {feed, wip, metaData, expireDate});
                 //console.log(feed);
+                res.send('This app is already expired. We will get back to you later.');
 
             }, function(err){
                 console.log(err);
