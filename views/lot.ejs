@@ -335,15 +335,6 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-info alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <i class="icon fa fa-warning"></i>
-                        This prototype will expire <b><%= expireDate %></b>. Please attend to our meeting for further discussion.
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <% for(let k=0;k<metaData.process.length;k++) { %>
                 <% if(metaData.process[k].to) { %>
                 <div class="col-md-3">
