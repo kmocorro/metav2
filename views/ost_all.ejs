@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="refresh" content="30">
     <title>OST | META</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -321,7 +322,7 @@
             <small>dashboard feed</small>
         </h1>
         <ol class="breadcrumb">
-            <li class="active"><a href="#"><i class="fa fa-dashboard"></i> Cycle Time</a></li>
+            <li class="active"><a href="#"><i class="fa fa-dashboard"></i> OST 1-5</a></li>
         </ol>
         </section>
         <!-- Main content -->
@@ -353,7 +354,7 @@
                     <div class="info-box dashboard-feed">
                         <span class="info-box-icon bg-green dashboard-feed-logo"><i class="ion ion-ios-cart-outline"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Binning</span>
+                            <span class="info-box-text">Binning - Ne</span>
                             <span class="info-box-number">
                                 <%= binning %>
                             </span>
@@ -364,7 +365,7 @@
                     <div class="info-box dashboard-feed">
                         <span class="info-box-icon bg-orange dashboard-feed-logo"><i class="ion ion-ios-eye-outline"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Cosmetics</span>
+                            <span class="info-box-text">Cosmetics - %Black</span>
                             <span class="info-box-number">
                                 <%= cosmetics %>
                             </span>
@@ -375,7 +376,7 @@
             <div class="row">
                 <% for(let x=0;x<metaData.ost.length;x++){ %>
                     <% if(metaData.ost[x].name) { %>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="box box-default">
                             <div class="box-header with-border">
                                 <h3 class="box-title"><%= metaData.ost[x].name %></h3>
@@ -385,7 +386,22 @@
                                     <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
                                         <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
                                             <% if(main_dashboard[i].feed[j].msg4 == '') { %>
-                                                <%= main_dashboard[i].feed[j].type %> - <%= main_dashboard[i].feed[j].msg3 %>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="direct-chat-msg">
+                                                            <div class="direct-chat-info clearfix">
+                                                                <span class="direct-chat-name pull-left">
+                                                                    <span class="ion ion-ios-bell feed-activity-warning"></span>
+                                                                    <%= main_dashboard[i].feed[j].type %>
+                                                                </span>
+                                                                <span class="direct-chat-timestamp pull-right"></span>
+                                                            </div>
+                                                            <div class="direct-chat-text mrl-text">
+                                                                <%= main_dashboard[i].feed[j].msg3 %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             <% } %>
                                         <% } %>
                                     <% } %>
