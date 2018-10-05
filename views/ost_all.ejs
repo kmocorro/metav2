@@ -319,7 +319,7 @@
         <section class="content-header">
         <h1>
             <%= name %>
-            <small>dashboard feed</small>
+            <small>dashboard</small>
         </h1>
         <ol class="breadcrumb">
             <li class="active"><a href="#"><i class="fa fa-dashboard"></i> OST 1-5</a></li>
@@ -414,6 +414,7 @@
                                     <% } %>
                                     </div>
                                 </div>
+                                <br/>
                                 <% for(let i=0;i<main_dashboard.length;i++){ %>
                                     <% if(main_dashboard[i].feed) { %>
                                         <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
@@ -424,7 +425,7 @@
                                                             <div class="direct-chat-msg">
                                                                 <div class="direct-chat-info clearfix">
                                                                     <span class="direct-chat-name pull-left">
-                                                                        <span class="ion ion-ios-bell feed-activity-warning"></span>
+                                                                        <span class="ion ion-ios-pulse-strong feed-activity-alert"></span>
                                                                         <%= main_dashboard[i].feed[j].type %>
                                                                     </span>
                                                                     <span class="direct-chat-timestamp pull-right"></span>
