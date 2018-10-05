@@ -935,7 +935,10 @@ module.exports = function(app){
                             }
 
                         } else {
-                            reject('No data @ ost1');
+                            let dashboard = {
+                                feed: []
+                            }
+                            reject(dashboard);
                         }
 
                     });
@@ -988,7 +991,10 @@ module.exports = function(app){
                             }
 
                         } else {
-                            reject('No data @ ost2');
+                            let dashboard = {
+                                feed: []
+                            }
+                            reject(dashboard);
                         }
 
                     });
@@ -1041,7 +1047,10 @@ module.exports = function(app){
                             }
 
                         } else {
-                            reject('No data @ ost3');
+                            let dashboard = {
+                                feed: []
+                            }
+                            reject(dashboard);
                         }
 
                     });
@@ -1092,7 +1101,10 @@ module.exports = function(app){
                             }
 
                         } else {
-                            reject('No data @ ost4');
+                            let dashboard = {
+                                feed: []
+                            }
+                            reject(dashboard);
                         }
 
                     });
@@ -1145,7 +1157,10 @@ module.exports = function(app){
                             }
 
                         } else {
-                            reject('No data @ ost5');
+                            let dashboard = {
+                                feed: []
+                            }
+                            reject(dashboard);
                         }
 
                     });
@@ -1257,7 +1272,7 @@ module.exports = function(app){
                                         return binning_AVE().then(function(binning){
                                             return cosmetics_AVE().then(function(cosmetics){
 
-                                                console.log(metaData);
+                                                //console.log(metaData);
                                                 res.render('ost_all', {name: 'OST 1-5', efficiency, djv, binning, cosmetics, main_dashboard, metaData});
                                             });
                                         });

@@ -376,32 +376,34 @@
             <div class="row">
                 <% for(let x=0;x<metaData.ost.length;x++){ %>
                     <% if(metaData.ost[x].name) { %>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="box box-default">
                             <div class="box-header with-border">
                                 <h3 class="box-title"><%= metaData.ost[x].name %></h3>
                             </div>
                             <div class="box-body">
                                 <% for(let i=0;i<main_dashboard.length;i++){ %>
-                                    <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                        <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                            <% if(main_dashboard[i].feed[j].msg4 == '') { %>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="direct-chat-msg">
-                                                            <div class="direct-chat-info clearfix">
-                                                                <span class="direct-chat-name pull-left">
-                                                                    <span class="ion ion-ios-bell feed-activity-warning"></span>
-                                                                    <%= main_dashboard[i].feed[j].type %>
-                                                                </span>
-                                                                <span class="direct-chat-timestamp pull-right"></span>
-                                                            </div>
-                                                            <div class="direct-chat-text mrl-text">
-                                                                <%= main_dashboard[i].feed[j].msg3 %>
+                                    <% if(main_dashboard[i].feed) { %>
+                                        <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
+                                            <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
+                                                <% if(main_dashboard[i].feed[j].msg4 == '') { %>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="direct-chat-msg">
+                                                                <div class="direct-chat-info clearfix">
+                                                                    <span class="direct-chat-name pull-left">
+                                                                        <span class="ion ion-ios-bell feed-activity-warning"></span>
+                                                                        <%= main_dashboard[i].feed[j].type %>
+                                                                    </span>
+                                                                    <span class="direct-chat-timestamp pull-right"></span>
+                                                                </div>
+                                                                <div class="direct-chat-text mrl-text">
+                                                                    <%= main_dashboard[i].feed[j].msg3 %>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                <% } %>
                                             <% } %>
                                         <% } %>
                                     <% } %>
