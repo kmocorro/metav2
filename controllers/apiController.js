@@ -934,6 +934,8 @@ module.exports = function(app){
                                 // if different message arrives.
                             }
 
+                        } else {
+                            reject('No data @ ost1');
                         }
 
                     });
@@ -985,6 +987,8 @@ module.exports = function(app){
                                 // if different message arrives.
                             }
 
+                        } else {
+                            reject('No data @ ost2');
                         }
 
                     });
@@ -1036,6 +1040,8 @@ module.exports = function(app){
                                 // if different message arrives.
                             }
 
+                        } else {
+                            reject('No data @ ost3');
                         }
 
                     });
@@ -1085,6 +1091,8 @@ module.exports = function(app){
                                 // if different message arrives.
                             }
 
+                        } else {
+                            reject('No data @ ost4');
                         }
 
                     });
@@ -1136,6 +1144,8 @@ module.exports = function(app){
                                 // if different message arrives.
                             }
 
+                        } else {
+                            reject('No data @ ost5');
                         }
 
                     });
@@ -1335,6 +1345,8 @@ module.exports = function(app){
                 res.send(err);
             });
 
+        } else {
+            res.send('Invalid');
         }
 
     });
