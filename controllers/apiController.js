@@ -834,6 +834,511 @@ module.exports = function(app){
 
     });
 
+    app.get('/ost', function(req, res){
+
+        let query_feed = {
+            tool: req.query.tool
+        };
+        
+        let authenticity_token = jwt.sign({
+            id: uuidv4(),
+            claim: {
+                signup: 'valid'
+            }
+        }, config.secret);
+        
+        function getGreetingTime (m) {
+            let g = null; //return g
+            
+            if(!m || !m.isValid()) { return; } //if we can't find a valid or filled moment, we return.
+            
+            let split_afternoon = 12 //24hr time to split the afternoon
+            let split_evening = 17 //24hr time to split the evening
+            let currentHour = parseFloat(m.format("HH"));
+            
+            if(currentHour >= split_afternoon && currentHour <= split_evening) {
+                g = "afternoon";
+            } else if(currentHour >= split_evening) {
+                g = "evening";
+            } else {
+                g = "morning";
+            }
+            
+            return g;
+        }
+        
+        // platter_"ip address".csv
+        let ost_platter = {
+            ost1: 'platter_10.3.76.36.csv',
+            ost2: 'platter_10.3.76.11.csv',
+            ost3: 'platter_10.3.76.25.csv',
+            ost4: 'platter_10.3.76.30.csv',
+            ost5: 'platter_10.3.76.28.csv'
+        }
+
+        // ost metadata
+        let metaData = {
+            ost: [
+                {name: 'OST1'}, 
+                {name: 'OST2'}, 
+                {name: 'OST3'}, 
+                {name: 'OST4'}, 
+                {name: 'OST5'}, 
+            ]
+        }
+
+
+        if(query_feed.tool == 'all'){
+
+            function ost_1_feed(){
+                return new Promise(function(resolve, reject){
+
+                    fs.readFile('./public/feed/' + ost_platter.ost1, {encoding:'utf8'}, function(err, data){
+                        if(err){return reject(err)};
+                        
+                        if(data){
+                            let arr_data = data.split('\n');
+
+                            //console.log(data);
+
+                            if(arr_data.length != 0 && arr_data.length >= 9){ // message we're looking for.
+                                let feed_to_display = [];
+
+                                for(let i=0;i<arr_data.length;i++){
+                                    if(arr_data[i]){
+                                        let feed = arr_data[i].split(',');
+
+                                        if(feed[4] !== 'OK'){
+                                            feed_to_display.push({
+                                                ost: 'OST1',
+                                                type: feed[0],
+                                                date_time: moment().subtract(5, 'minute').calendar(),
+                                                msg1: feed[1],
+                                                msg2: feed[2],
+                                                msg3: feed[3],
+                                                msg4: feed[4]
+                                            });
+                                        }
+                                    
+                                    }   
+                                }  
+
+                                let dashboard = {
+                                    feed: feed_to_display
+                                }
+
+                                resolve(dashboard);
+                                //console.log(dashboard);
+
+                            } else {
+                                // if different message arrives.
+                            }
+
+                        }
+
+                    });
+
+                });
+            }
+
+            function ost_2_feed(){
+                return new Promise(function(resolve, reject){
+
+                    fs.readFile('./public/feed/' + ost_platter.ost2, {encoding:'utf8'}, function(err, data){
+                        if(err){return reject(err)};
+                        
+                        if(data){
+                            let arr_data = data.split('\n');
+
+                            //console.log(data);
+
+                            if(arr_data.length != 0 && arr_data.length >= 9){ // message we're looking for.
+                                let feed_to_display = [];
+
+                                for(let i=0;i<arr_data.length;i++){
+                                    if(arr_data[i]){
+                                        let feed = arr_data[i].split(',');
+
+                                        if(feed[4] !== 'OK'){
+                                            feed_to_display.push({
+                                                ost: 'OST2',
+                                                type: feed[0],
+                                                date_time: moment().subtract(5, 'minute').calendar(),
+                                                msg1: feed[1],
+                                                msg2: feed[2],
+                                                msg3: feed[3],
+                                                msg4: feed[4]
+                                            });
+                                        }
+                                    
+                                    }   
+                                }  
+
+                                let dashboard = {
+                                    feed: feed_to_display
+                                }
+
+                                resolve(dashboard);
+                                //console.log(dashboard);
+
+                            } else {
+                                // if different message arrives.
+                            }
+
+                        }
+
+                    });
+
+                });
+            }
+
+            function ost_3_feed(){
+                return new Promise(function(resolve, reject){
+
+                    fs.readFile('./public/feed/' + ost_platter.ost3, {encoding:'utf8'}, function(err, data){
+                        if(err){return reject(err)};
+                        
+                        if(data){
+                            let arr_data = data.split('\n');
+
+                            //console.log(data);
+
+                            if(arr_data.length != 0 && arr_data.length >= 9){ // message we're looking for.
+                                let feed_to_display = [];
+
+                                for(let i=0;i<arr_data.length;i++){
+                                    if(arr_data[i]){
+                                        let feed = arr_data[i].split(',');
+
+                                        if(feed[4] !== 'OK'){
+                                            feed_to_display.push({
+                                                ost: 'OST3',
+                                                type: feed[0],
+                                                date_time: moment().subtract(5, 'minute').calendar(),
+                                                msg1: feed[1],
+                                                msg2: feed[2],
+                                                msg3: feed[3],
+                                                msg4: feed[4]
+                                            });
+                                        }
+                                    
+                                    }   
+                                }  
+
+                                let dashboard = {
+                                    feed: feed_to_display
+                                }
+
+                                resolve(dashboard);
+                                //console.log(dashboard);
+
+                            } else {
+                                // if different message arrives.
+                            }
+
+                        }
+
+                    });
+
+                });
+            }
+
+            function ost_4_feed(){
+                return new Promise(function(resolve, reject){
+
+                    fs.readFile('./public/feed/' + ost_platter.ost4, {encoding:'utf8'}, function(err, data){
+                        if(err){return reject(err)};
+                        
+                        if(data){
+                            let arr_data = data.split('\n');
+
+                            if(arr_data.length != 0 && arr_data.length >= 9){ // message we're looking for.
+                                let feed_to_display = [];
+
+                                for(let i=0;i<arr_data.length;i++){
+                                    if(arr_data[i]){
+                                        let feed = arr_data[i].split(',');
+
+                                        if(feed[4] !== 'OK'){
+                                            feed_to_display.push({
+                                                ost: 'OST4',
+                                                type: feed[0],
+                                                date_time: moment().subtract(5, 'minute').calendar(),
+                                                msg1: feed[1],
+                                                msg2: feed[2],
+                                                msg3: feed[3],
+                                                msg4: feed[4]
+                                            });
+                                        }
+                                    
+                                    }   
+                                }  
+
+                                let dashboard = {
+                                    feed: feed_to_display
+                                }
+
+                                resolve(dashboard);
+                                //console.log(dashboard);
+
+                            } else {
+                                // if different message arrives.
+                            }
+
+                        }
+
+                    });
+
+                });
+            }
+
+            function ost_5_feed(){
+                return new Promise(function(resolve, reject){
+
+                    fs.readFile('./public/feed/' + ost_platter.ost5, {encoding:'utf8'}, function(err, data){
+                        if(err){return reject(err)};
+                        
+                        if(data){
+                            let arr_data = data.split('\n');
+
+                          //  console.log(data);
+
+                            if(arr_data.length != 0 && arr_data.length >= 9){ // message we're looking for.
+                                let feed_to_display = [];
+
+                                for(let i=0;i<arr_data.length;i++){
+                                    if(arr_data[i]){
+                                        let feed = arr_data[i].split(',');
+
+                                        if(feed[4] !== 'OK'){
+                                            feed_to_display.push({
+                                                ost: 'OST5',
+                                                type: feed[0],
+                                                date_time: moment().subtract(5, 'minute').calendar(),
+                                                msg1: feed[1],
+                                                msg2: feed[2],
+                                                msg3: feed[3],
+                                                msg4: feed[4]
+                                            });
+                                        }
+                                    
+                                    }   
+                                }  
+
+                                let dashboard = {
+                                    feed: feed_to_display
+                                }
+
+                                resolve(dashboard);
+                             //   console.log(dashboard);
+
+                            } else {
+                                // if different message arrives.
+                            }
+
+                        }
+
+                    });
+
+                });
+            }
+
+            ost_1_feed().then(function(ost_feed1){
+                return ost_2_feed().then(function(ost_feed2){
+                    return ost_3_feed().then(function(ost_feed3){
+                        return ost_4_feed().then(function(ost_feed4){
+                            return ost_5_feed().then(function(ost_feed5){
+
+                                let main_dashboard = [];
+
+                                main_dashboard.push(
+                                    ost_feed1,
+                                    ost_feed2,
+                                    ost_feed3,
+                                    ost_feed4,
+                                    ost_feed5,
+                                );
+
+                                function efficiency_AVE(){
+                                    return new Promise(function(resolve, reject){
+
+                                        let sum = 0;
+        
+                                        for(let i=0; i<main_dashboard.length;i++){
+                                            for(let j=0; j<main_dashboard[i].feed.length;j++){
+                                                if(main_dashboard[i].feed[j].type == 'Efficiency'){
+                                                    sum += parseFloat(main_dashboard[i].feed[j].msg2) // summing efficiency
+                                                }
+                                            }
+                                        }
+        
+                                        let efficiency_avg = sum/5; // ost 1-5 ave
+                                        
+                                        resolve(efficiency_avg.toFixed(3));
+
+                                    });
+
+                                }
+
+                                function dJv_AVE(){
+                                    return new Promise(function(resolve, reject){
+
+                                        let sum = 0;
+
+                                        for(let i=0; i<main_dashboard.length;i++){
+                                            for(let j=0; j<main_dashboard[i].feed.length;j++){
+                                                if(main_dashboard[i].feed[j].type == 'dJv'){
+                                                    sum += parseFloat(main_dashboard[i].feed[j].msg2) // summing efficiency
+                                                }
+                                            }
+                                        }
+        
+                                        let djv_avg = sum/5; // ost 1-5 ave
+                                        
+                                        resolve(djv_avg.toFixed(3));
+
+                                    });
+                                }
+
+                                function binning_AVE(){
+                                    return new Promise(function(resolve, reject){
+
+                                        let sum = 0;
+
+                                        for(let i=0; i<main_dashboard.length;i++){
+                                            for(let j=0; j<main_dashboard[i].feed.length;j++){
+                                                if(main_dashboard[i].feed[j].type == 'Binning'){
+                                                    sum += parseFloat(main_dashboard[i].feed[j].msg1) // 1st message
+                                                }
+                                            }
+                                        }
+        
+                                        let binning_avg = sum/5; // ost 1-5 ave
+                                        
+                                        resolve(binning_avg.toFixed(3));
+
+                                    });
+                                }
+
+                                function cosmetics_AVE(){
+                                    return new Promise(function(resolve, reject){
+
+                                        let sum = 0;
+
+                                        for(let i=0; i<main_dashboard.length;i++){
+                                            for(let j=0; j<main_dashboard[i].feed.length;j++){
+                                                if(main_dashboard[i].feed[j].type == 'Cosmetics'){
+                                                    sum += parseFloat(main_dashboard[i].feed[j].msg1) // 1st message
+                                                }
+                                            }
+                                        }
+        
+                                        let cosmetics_avg = sum/5; // ost 1-5 ave
+                                        
+                                        resolve(cosmetics_avg.toFixed(3));
+
+                                    });
+                                }
+
+                                //console.log(main_dashboard);
+
+                                return efficiency_AVE().then(function(efficiency){
+                                    return dJv_AVE().then(function(djv){
+                                        return binning_AVE().then(function(binning){
+                                            return cosmetics_AVE().then(function(cosmetics){
+
+                                                console.log(metaData);
+                                                res.render('ost_all', {name: 'OST 1-5', efficiency, djv, binning, cosmetics, main_dashboard, metaData});
+                                            });
+                                        });
+                                    
+                                    });
+
+                                },  function(){
+                                    res.send('Error @ efficiency averaging.');
+                                });
+
+                            },  function(err){
+                                res.send(err);
+                            });
+                        },  function(err){
+                            res.send(err);
+                        });
+                    },  function(err){
+                        res.send(err);
+                    });
+                },  function(err){
+                    res.send(err);
+                });
+            },  function(err){
+                res.send(err);
+            });
+
+    
+        } else if(query_feed.tool == 'ost1'){
+
+            function ost_1(){
+                return new Promise(function(resolve, reject){
+
+                    fs.readFile('./public/feed/' + ost_platter.ost1, {encoding:'utf8'}, function(err, data){
+                        if(err){console.log(err)};
+                        
+                        if(data){
+                            let arr_data = data.split('\n');
+
+                            console.log(data);
+
+                            if(arr_data.length != 0 && arr_data.length >= 9){ // message we're looking for.
+                                let feed_to_display = [];
+
+                                for(let i=0;i<arr_data.length;i++){
+                                    if(arr_data[i]){
+                                        let feed = arr_data[i].split(',');
+
+                                        if(feed[4] !== 'OK'){
+                                            feed_to_display.push({
+                                                ost: 'OST1',
+                                                type: feed[0],
+                                                date_time: moment().subtract(5, 'minute').calendar(),
+                                                msg1: feed[1],
+                                                msg2: feed[2],
+                                                msg3: feed[3],
+                                                msg4: feed[4]
+                                            });
+                                        }
+                                    
+                                    }   
+                                }  
+
+                                let dashboard = {
+                                    feed: feed_to_display
+                                }
+
+                                resolve(dashboard);
+                                console.log(dashboard);
+
+                            } else {
+                                // if different message arrives.
+                            }
+
+                        }
+
+                    });
+
+                });
+            }
+
+            ost_1().then(function(dashboard){
+                let ost_name = 'OST1';
+                res.render('ost', {name: ost_name, dashboard});
+            },  function(err){
+                res.send(err);
+            });
+
+        }
+
+    });
+
     app.post('/api/hourly', function(req, res){
         let form = new formidable.IncomingForm();
 
