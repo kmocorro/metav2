@@ -1273,7 +1273,8 @@ module.exports = function(app){
                                             return cosmetics_AVE().then(function(cosmetics){
 
                                                 //console.log(metaData);
-                                                res.render('ost_all', {name: 'OST 1-5', efficiency, djv, binning, cosmetics, main_dashboard, metaData});
+                                                //res.render('ost_all', {name: 'OST 1-5', efficiency, djv, binning, cosmetics, main_dashboard, metaData});
+                                                res.send('under maintenance.');
                                             });
                                         });
                                     
