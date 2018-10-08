@@ -916,7 +916,9 @@ module.exports = function(app){
                                                 msg1: feed[1],
                                                 msg2: feed[2],
                                                 msg3: feed[3],
-                                                msg4: feed[4]
+                                                msg4: feed[4],
+                                                binning_qty: feed[5] || 0, 
+                                                binning_total: feed[8] || 0
                                             });
                                         }
                                     
@@ -972,7 +974,9 @@ module.exports = function(app){
                                                 msg1: feed[1],
                                                 msg2: feed[2],
                                                 msg3: feed[3],
-                                                msg4: feed[4]
+                                                msg4: feed[4],
+                                                binning_qty: feed[5] || 0, 
+                                                binning_total: feed[8] || 0
                                             });
                                         }
                                     
@@ -1028,7 +1032,9 @@ module.exports = function(app){
                                                 msg1: feed[1],
                                                 msg2: feed[2],
                                                 msg3: feed[3],
-                                                msg4: feed[4]
+                                                msg4: feed[4],
+                                                binning_qty: feed[5] || 0, 
+                                                binning_total: feed[8] || 0
                                             });
                                         }
                                     
@@ -1082,7 +1088,9 @@ module.exports = function(app){
                                                 msg1: feed[1],
                                                 msg2: feed[2],
                                                 msg3: feed[3],
-                                                msg4: feed[4]
+                                                msg4: feed[4],
+                                                binning_qty: feed[5] || 0, 
+                                                binning_total: feed[8] || 0
                                             });
                                         }
                                     
@@ -1138,7 +1146,9 @@ module.exports = function(app){
                                                 msg1: feed[1],
                                                 msg2: feed[2],
                                                 msg3: feed[3],
-                                                msg4: feed[4]
+                                                msg4: feed[4],
+                                                binning_qty: feed[5] || 0, 
+                                                binning_total: feed[8] || 0
                                             });
                                         }
                                     
@@ -1228,17 +1238,19 @@ module.exports = function(app){
                                 function binning_AVE(){
                                     return new Promise(function(resolve, reject){
 
-                                        let sum = 0;
+                                        let sumQTY = 0;
+                                        let sumTOTAL = 0;
 
                                         for(let i=0; i<main_dashboard.length;i++){
                                             for(let j=0; j<main_dashboard[i].feed.length;j++){
                                                 if(main_dashboard[i].feed[j].type == 'Binning'){
-                                                    sum += parseFloat(main_dashboard[i].feed[j].msg1) // 1st message
+                                                    sumQTY += parseFloat(main_dashboard[i].feed[j].binning_qty) // binning qty
+                                                    sumTOTAL += parseFloat(main_dashboard[i].feed[j].binning_total) // total
                                                 }
                                             }
                                         }
-        
-                                        let binning_avg = sum/5; // ost 1-5 ave
+                                        
+                                        let binning_avg = (sumQTY/sumTOTAL) * 100; // wooo
                                         
                                         resolve(binning_avg.toFixed(3));
 
