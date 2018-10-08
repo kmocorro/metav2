@@ -450,6 +450,38 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-8">
+                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
+                                        <% if(main_dashboard[i].feed) { %>
+                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
+                                                <% if(main_dashboard[i].feed[j].type == 'LOTID') { %>
+                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
+                                                    <div style="font-size: 14px;">
+                                                        <small><%= main_dashboard[i].feed[j].msg1 %></small>
+                                                    </div>
+                                                    <% } %>
+                                                <% } %>
+                                            <% } %>
+                                        <% } %>
+                                    <% } %>   
+                                    </div>
+                                    <div class="col-md-4">
+                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
+                                        <% if(main_dashboard[i].feed) { %>
+                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
+                                                <% if(main_dashboard[i].feed[j].type == 'Count') { %>
+                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
+                                                    <div class="pull-right" style="font-size: 14px;">
+                                                        <small><b>Qty</b> <%= main_dashboard[i].feed[j].msg1 %></small>
+                                                    </div>
+                                                    <% } %>
+                                                <% } %>
+                                            <% } %>
+                                        <% } %>
+                                    <% } %>  
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                     <% for(let i=0;i<main_dashboard.length;i++) { %>
                                         <% if(main_dashboard[i].feed) { %>
@@ -481,39 +513,6 @@
                                     <% } %> 
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-9">
-                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
-                                        <% if(main_dashboard[i].feed) { %>
-                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                                <% if(main_dashboard[i].feed[j].type == 'LOTID') { %>
-                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                    <div style="font-size: 14px;">
-                                                        <small><%= main_dashboard[i].feed[j].msg1 %></small>
-                                                    </div>
-                                                    <% } %>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>   
-                                    </div>
-                                    <div class="col-md-3">
-                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
-                                        <% if(main_dashboard[i].feed) { %>
-                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                                <% if(main_dashboard[i].feed[j].type == 'Count') { %>
-                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                    <div class="pull-right" style="font-size: 14px;">
-                                                        <small><b>Qty:</b> <%= main_dashboard[i].feed[j].msg1 %></small>
-                                                    </div>
-                                                    <% } %>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>  
-                                    </div>
-                                </div>
-                                
                             </div>
                         </div>
                     </div>
