@@ -1285,19 +1285,19 @@ module.exports = function(app){
                                 });
 
                             },  function(err){
-                                res.send(err);
+                                res.send('Error w');
                             });
                         },  function(err){
-                            res.send(err);
+                            res.send('Error');
                         });
                     },  function(err){
-                        res.send(err);
+                        res.send('Error');
                     });
                 },  function(err){
-                    res.send(err);
+                    res.send('Error');
                 });
             },  function(err){
-                res.send(err);
+                res.send('Error');
             });
 
     

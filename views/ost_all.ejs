@@ -343,7 +343,7 @@
                     <div class="info-box dashboard-feed">
                         <span class="info-box-icon bg-green dashboard-feed-logo"><i class="ion ion-ios-cart-outline"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Binning - Ne</span>
+                            <span class="info-box-text">Bin - Ne</span>
                             <span class="info-box-number">
                                 <%= binning %>
                             </span>
@@ -383,6 +383,23 @@
                             </div>
                             <div class="box-body">
                                 <div class="row">
+                                    <div class="col-xs-12">
+                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
+                                        <% if(main_dashboard[i].feed) { %>
+                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
+                                                <% if(main_dashboard[i].feed[j].type == 'LOTID') { %>
+                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
+                                                    <div class="text-center">
+                                                        <b><%= main_dashboard[i].feed[j].type %></b> <%= main_dashboard[i].feed[j].msg1 %>
+                                                    </div>
+                                                    <% } %>
+                                                <% } %>
+                                            <% } %>
+                                        <% } %>
+                                    <% } %>   
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-xs-6">
                                     <% for(let i=0;i<main_dashboard.length;i++){ %>
                                         <% if(main_dashboard[i].feed) { %>
@@ -390,7 +407,7 @@
                                                 <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
                                                     <% if(main_dashboard[i].feed[j].type == 'Efficiency') { %>
                                                         <div class="text-center">
-                                                            <b><%= main_dashboard[i].feed[j].type %></b> <%= main_dashboard[i].feed[j].msg2 %>
+                                                            <b><%= main_dashboard[i].feed[j].type %></b> <%= main_dashboard[i].feed[j].msg2 %>%
                                                         </div>
                                                     <% } %>
                                                 <% } %>
@@ -405,7 +422,7 @@
                                                 <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
                                                     <% if(main_dashboard[i].feed[j].type == 'Binning') { %>
                                                         <div class="text-center">
-                                                            <b><%= main_dashboard[i].feed[j].type %></b> <%= main_dashboard[i].feed[j].msg1 %>
+                                                            <b>Bin NE</b> <%= main_dashboard[i].feed[j].msg1 %>%
                                                         </div>
                                                     <% } %>
                                                 <% } %>
