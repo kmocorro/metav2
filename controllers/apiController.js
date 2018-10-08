@@ -869,11 +869,11 @@ module.exports = function(app){
         
         // platter_"ip address".csv
         let ost_platter = {
-            ost1: 'platter_10.3.76.36.csv',
-            ost2: 'platter_10.3.76.11.csv',
-            ost3: 'platter_10.3.76.25.csv',
-            ost4: 'platter_10.3.76.30.csv',
-            ost5: 'platter_10.3.76.28.csv'
+            ost1: 'platter_OST1.csv',
+            ost2: 'platter_OST2.csv',
+            ost3: 'platter_OST3.csv',
+            ost4: 'platter_OST4.csv',
+            ost5: 'platter_OST5.csv'
         }
 
         // ost metadata
