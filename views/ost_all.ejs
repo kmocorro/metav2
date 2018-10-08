@@ -443,13 +443,6 @@
                             </div>
                             <div class="box-footer">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div>
-                                            <small>Last 12 hrs:</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-8">
                                     <% for(let i=0;i<main_dashboard.length;i++) { %>
                                         <% if(main_dashboard[i].feed) { %>
@@ -472,13 +465,20 @@
                                                 <% if(main_dashboard[i].feed[j].type == 'Count') { %>
                                                     <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
                                                     <div class="pull-right" style="font-size: 14px;">
-                                                        <small><b>Qty</b> <%= main_dashboard[i].feed[j].msg1 %></small>
+                                                        <small>Qty: <%= main_dashboard[i].feed[j].msg1 %></small>
                                                     </div>
                                                     <% } %>
                                                 <% } %>
                                             <% } %>
                                         <% } %>
                                     <% } %>  
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div>
+                                            <small>Last 12 hrs:</small>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -489,7 +489,7 @@
                                                 <% if(main_dashboard[i].feed[j].type == 'EfficiencyDay') { %>
                                                     <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
                                                     <div class="" style="font-size: 14px;">
-                                                        <small><b>Eff:</b> <%= main_dashboard[i].feed[j].msg2 %>%</small>
+                                                        <small>Eff: <%= main_dashboard[i].feed[j].msg2 %>%</small>
                                                     </div>
                                                     <% } %>
                                                 <% } %>
@@ -504,7 +504,7 @@
                                                 <% if(main_dashboard[i].feed[j].type == 'BinningDay') { %>
                                                     <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
                                                     <div class="pull-right" style="font-size: 14px;">
-                                                        <small><b>NE:</b> <%= main_dashboard[i].feed[j].msg1 %>%</small>
+                                                        <small>NE: <%= main_dashboard[i].feed[j].msg1 %>%</small>
                                                     </div>
                                                     <% } %>
                                                 <% } %>
