@@ -302,11 +302,13 @@
             -->
         </ul>
         <!--reminder ad-->
+        <!--
         <div id="reminder-ad" class="show color_5">
             <p class="reminder-ad-p">Hello Fab4,</p>
             <p class="reminder-ad-p">This app is a platform for prototypes. Any issues, downtime and delays are expected.</p>
             <p class="reminder-ad-p">Thank you! ❤️</p>
         </div>
+        -->
         </section>
         <!-- /.sidebar -->
     </aside>
@@ -317,13 +319,6 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-        <h1>
-            <%= name %>
-            <small>dashboard</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li class="active"><a href="#"><i class="fa fa-dashboard"></i> OST 1-5</a></li>
-        </ol>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -383,23 +378,6 @@
                             </div>
                             <div class="box-body">
                                 <div class="row">
-                                    <div class="col-xs-12">
-                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
-                                        <% if(main_dashboard[i].feed) { %>
-                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                                <% if(main_dashboard[i].feed[j].type == 'LOTID') { %>
-                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                    <div class="text-center">
-                                                        <b><%= main_dashboard[i].feed[j].type %></b> <%= main_dashboard[i].feed[j].msg1 %>
-                                                    </div>
-                                                    <% } %>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>   
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-xs-6">
                                     <% for(let i=0;i<main_dashboard.length;i++){ %>
                                         <% if(main_dashboard[i].feed) { %>
@@ -448,7 +426,7 @@
                                                                     <span class="direct-chat-timestamp pull-right"></span>
                                                                 </div>
                                                                 <div class="direct-chat-text mrl-text">
-                                                                    <%= main_dashboard[i].feed[j].msg3 %>
+                                                                        <%= main_dashboard[i].feed[j].msg1 %> / <%= main_dashboard[i].feed[j].msg2 %>  = <%= main_dashboard[i].feed[j].msg3 %>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -460,6 +438,38 @@
                                 <% } %>
                             </div>
                             <div class="box-footer">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
+                                        <% if(main_dashboard[i].feed) { %>
+                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
+                                                <% if(main_dashboard[i].feed[j].type == 'LOTID') { %>
+                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
+                                                    <div style="font-size: 10px;">
+                                                        <smaill><%= main_dashboard[i].feed[j].msg1 %></small>
+                                                    </div>
+                                                    <% } %>
+                                                <% } %>
+                                            <% } %>
+                                        <% } %>
+                                    <% } %>   
+                                    </div>
+                                    <div class="col-md-6">
+                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
+                                        <% if(main_dashboard[i].feed) { %>
+                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
+                                                <% if(main_dashboard[i].feed[j].type == 'Yield') { %>
+                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
+                                                    <div class="pull-right" style="font-size: 10px;">
+                                                        <smaill>#<%= main_dashboard[i].feed[j].msg2 %></small>
+                                                    </div>
+                                                    <% } %>
+                                                <% } %>
+                                            <% } %>
+                                        <% } %>
+                                    <% } %>  
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
