@@ -1243,7 +1243,7 @@ module.exports = function(app){
 
                                         for(let i=0; i<main_dashboard.length;i++){
                                             for(let j=0; j<main_dashboard[i].feed.length;j++){
-                                                if(main_dashboard[i].feed[j].type == 'Binning'){
+                                                if(main_dashboard[i].feed[j].type == 'BinningDay'){
                                                     sumQTY += parseFloat(main_dashboard[i].feed[j].binning_qty) // binning qty
                                                     sumTOTAL += parseFloat(main_dashboard[i].feed[j].binning_total) // total
                                                 }
