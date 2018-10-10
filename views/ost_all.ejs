@@ -334,7 +334,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Efficiency</span>
                             <span class="info-box-number">
-                                <%= efficiency %>
+                                <%= efficiency %>%
                             </span>
                         </div>
                     </div>
@@ -345,7 +345,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Bin - Ne</span>
                             <span class="info-box-number">
-                                <%= binning %>
+                                <%= binning %>%
                             </span>
                         </div>
                     </div>
@@ -356,7 +356,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Cosmetics - %Black</span>
                             <span class="info-box-number">
-                                <%= cosmetics %>
+                                <%= cosmetics %>%
                             </span>
                         </div>
                     </div>
@@ -383,14 +383,14 @@
                             </div>
                             <div class="box-body ost-boxes-style">
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-4">
                                     <% for(let i=0;i<main_dashboard.length;i++){ %>
                                         <% if(main_dashboard[i].feed) { %>
                                             <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
                                                 <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
                                                     <% if(main_dashboard[i].feed[j].type == 'Efficiency') { %>
                                                         <div class="text-center">
-                                                            <b><%= main_dashboard[i].feed[j].type %></b> <%= main_dashboard[i].feed[j].msg2 %>%
+                                                            <b>Eff</b> <%= main_dashboard[i].feed[j].msg2 %>%
                                                         </div>
                                                     <% } %>
                                                 <% } %>
@@ -398,14 +398,29 @@
                                         <% } %>
                                     <% } %>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                    <% for(let i=0;i<main_dashboard.length;i++){ %>
+                                        <% if(main_dashboard[i].feed) { %>
+                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
+                                                <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
+                                                    <% if(main_dashboard[i].feed[j].type == 'Cosmetics') { %>
+                                                        <div class="text-center">
+                                                            <b>%B</b> <%= main_dashboard[i].feed[j].msg1 %>%
+                                                        </div>
+                                                    <% } %>
+                                                <% } %>
+                                            <% } %>
+                                        <% } %>
+                                    <% } %>
+                                    </div>
+                                    <div class="col-md-4">
                                     <% for(let i=0;i<main_dashboard.length;i++){ %>
                                         <% if(main_dashboard[i].feed) { %>
                                             <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
                                                 <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
                                                     <% if(main_dashboard[i].feed[j].type == 'Binning') { %>
                                                         <div class="text-center">
-                                                            <b>Bin NE</b> <%= main_dashboard[i].feed[j].msg1 %>%
+                                                            <b>NE</b> <%= main_dashboard[i].feed[j].msg1 %>%
                                                         </div>
                                                     <% } %>
                                                 <% } %>

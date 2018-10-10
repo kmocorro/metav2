@@ -1252,7 +1252,7 @@ module.exports = function(app){
                                         
                                         let binning_avg = (sumQTY/sumTOTAL) * 100; // wooo
                                         
-                                        resolve(binning_avg.toFixed(3));
+                                        resolve(binning_avg.toFixed(2));
 
                                     });
                                 }
@@ -1272,7 +1272,7 @@ module.exports = function(app){
         
                                         let cosmetics_avg = sum/5; // ost 1-5 ave
                                         
-                                        resolve(cosmetics_avg.toFixed(3));
+                                        resolve(cosmetics_avg.toFixed(0));
 
                                     });
                                 }
