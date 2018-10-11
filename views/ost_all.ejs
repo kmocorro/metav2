@@ -148,9 +148,6 @@
                 </ul>
             </li>
             -->
-            <li class="">
-                <span class="hidden-xs">OST 1-5</span>
-            </li>
             <!-- User Account: style can be found in dropdown.less 
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -376,7 +373,7 @@
             <div class="row">
                 <% for(let x=0;x<metaData.ost.length;x++){ %>
                     <% if(metaData.ost[x].name) { %>
-                    <div class="col-md-2">
+                    <div class="col-md-2  box-5-fit">
                         <div class="box box-default">
                             <div class="box-header with-border">
                                 <h3 class="box-title"><%= metaData.ost[x].name %></h3>
@@ -420,7 +417,7 @@
                                                 <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
                                                     <% if(main_dashboard[i].feed[j].type == 'Binning') { %>
                                                         <div class="text-center">
-                                                            <b>NE</b> <%= main_dashboard[i].feed[j].msg1 %>%
+                                                            <b>Bin NE</b> <%= main_dashboard[i].feed[j].msg1 %>%
                                                         </div>
                                                     <% } %>
                                                 <% } %>
