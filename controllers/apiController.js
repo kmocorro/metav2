@@ -1198,16 +1198,21 @@ module.exports = function(app){
                                     return new Promise(function(resolve, reject){
 
                                         let sum = 0;
+                                        let divisor = 0;
         
                                         for(let i=0; i<main_dashboard.length;i++){
                                             for(let j=0; j<main_dashboard[i].feed.length;j++){
                                                 if(main_dashboard[i].feed[j].type == 'Efficiency'){
-                                                    sum += parseFloat(main_dashboard[i].feed[j].msg2) // summing efficiency
+                                                    if(main_dashboard[i].feed[j].msg2 > 20){
+                                                        sum += parseFloat(main_dashboard[i].feed[j].msg2) // summing efficiency
+                                                        divisor++;
+                                                    }
                                                 }
                                             }
                                         }
-        
-                                        let efficiency_avg = sum/5; // ost 1-5 ave
+
+                                        //console.log(divisor);
+                                        let efficiency_avg = sum/divisor; // ost 1-5 ave
                                         
                                         resolve(efficiency_avg.toFixed(3));
 
@@ -1377,6 +1382,10 @@ module.exports = function(app){
             res.send('Invalid');
         }
 
+    });
+
+    app.get('/ost-toolmark', function(req, res){
+        res.render('ost-toolmark');
     });
 
     app.post('/api/hourly', function(req, res){

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="refresh" content="30">
-    <title>OST | META</title>
+    <title>OST Toolmark | META</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -324,215 +324,26 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box dashboard-feed">
-                        <span class="info-box-icon bg-blue dashboard-feed-logo"><i class="ion ion-ios-sunny-outline"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Efficiency</span>
-                            <span class="info-box-number">
-                                <%= efficiency %>%
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box dashboard-feed">
-                        <span class="info-box-icon bg-green dashboard-feed-logo"><i class="ion ion-ios-box-outline"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Bin - Ne</span>
-                            <span class="info-box-number">
-                                <%= binning %>%
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box dashboard-feed">
-                        <span class="info-box-icon bg-black dashboard-feed-logo"><i class="ion ion-ios-eye-outline"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Cosmetics - %Black</span>
-                            <span class="info-box-number">
-                                <%= cosmetics %>%
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box dashboard-feed">
-                        <span class="info-box-icon bg-orange dashboard-feed-logo"><i class="ion ion-ios-bolt-outline"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">dJV</span>
-                            <span class="info-box-number">
-                                <%= djv %>
-                            </span>
+           <div class="row">
+                <div class="col-md-5">
+                    <div class="box box-warning  col-centered">
+                        <div class="box-body">
+                            <div class='tableauPlaceholder'>
+                                <object class='tableauViz' width='500px' height='500px' style='display:none;'>
+                                    <param name='host_url' value='http%3A%2F%2Ftableau.sunpowercorp.com%2F' /> 
+                                    <param name='embed_code_version' value='3' /> 
+                                    <param name='site_root' value='&#47;t&#47;MES_MANILA' />
+                                    <param name='name' value='OST1-5Toolmarkmapping&#47;OSTToolmarkMapping' />
+                                    <param name='tabs' value='no' />
+                                    <param name='toolbar' value='no' />
+                                    <param name='showAppBanner' value='false' />
+                                    <param name='filter' value='iframeSizedToWindow=true' />
+                                </object>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <% for(let x=0;x<metaData.ost.length;x++){ %>
-                    <% if(metaData.ost[x].name) { %>
-                    <div class="col-md-2  box-5-fit">
-                        <div class="box box-default">
-                            <div class="box-header with-border">
-                                <h3 class="box-title"><%= metaData.ost[x].name %></h3>
-                            </div>
-                            <div class="box-body ost-boxes-style">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                    <% for(let i=0;i<main_dashboard.length;i++){ %>
-                                        <% if(main_dashboard[i].feed) { %>
-                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                                <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                    <% if(main_dashboard[i].feed[j].type == 'Efficiency') { %>
-                                                        <div class="text-center">
-                                                            <b>Eff</b> <%= main_dashboard[i].feed[j].msg2 %>%
-                                                        </div>
-                                                    <% } %>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>
-                                    </div>
-                                    <div class="col-md-4">
-                                    <% for(let i=0;i<main_dashboard.length;i++){ %>
-                                        <% if(main_dashboard[i].feed) { %>
-                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                                <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                    <% if(main_dashboard[i].feed[j].type == 'Cosmetics') { %>
-                                                        <div class="text-center">
-                                                            <b>%BLK</b> <%= main_dashboard[i].feed[j].msg1 %>%
-                                                        </div>
-                                                    <% } %>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>
-                                    </div>
-                                    <div class="col-md-4">
-                                    <% for(let i=0;i<main_dashboard.length;i++){ %>
-                                        <% if(main_dashboard[i].feed) { %>
-                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                                <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                    <% if(main_dashboard[i].feed[j].type == 'Binning') { %>
-                                                        <div class="text-center">
-                                                            <b>Bin NE</b> <%= main_dashboard[i].feed[j].msg1 %>%
-                                                        </div>
-                                                    <% } %>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>
-                                    </div>
-                                </div>
-                                <br/>
-                                <% for(let i=0;i<main_dashboard.length;i++){ %>
-                                    <% if(main_dashboard[i].feed) { %>
-                                        <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                            <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                <% if(main_dashboard[i].feed[j].msg4 == '') { %>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="direct-chat-msg">
-                                                                <div class="direct-chat-info clearfix">
-                                                                    <span class="direct-chat-name pull-left">
-                                                                        <span class="ion ion-ios-box feed-activity-alert"></span>
-                                                                        <%= main_dashboard[i].feed[j].type %>
-                                                                    </span>
-                                                                    <span class="direct-chat-timestamp pull-right"></span>
-                                                                </div>
-                                                                <div class="direct-chat-text mrl-text">
-                                                                        <%= main_dashboard[i].feed[j].msg1 %> / <%= main_dashboard[i].feed[j].msg2 %>  = <%= main_dashboard[i].feed[j].msg3 %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>
-                                <% } %>
-                            </div>
-                            <div class="box-footer">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
-                                        <% if(main_dashboard[i].feed) { %>
-                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                                <% if(main_dashboard[i].feed[j].type == 'LOTID') { %>
-                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                    <div style="font-size: 14px;">
-                                                        <small><%= main_dashboard[i].feed[j].msg1 %></small>
-                                                    </div>
-                                                    <% } %>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>   
-                                    </div>
-                                    <div class="col-md-4">
-                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
-                                        <% if(main_dashboard[i].feed) { %>
-                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                                <% if(main_dashboard[i].feed[j].type == 'Count') { %>
-                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                    <div class="pull-right" style="font-size: 14px;">
-                                                        <small>Qty: <%= main_dashboard[i].feed[j].msg1 %></small>
-                                                    </div>
-                                                    <% } %>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>  
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div>
-                                            <small>Last 3 hrs:</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
-                                        <% if(main_dashboard[i].feed) { %>
-                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                                <% if(main_dashboard[i].feed[j].type == 'EfficiencyDay') { %>
-                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                    <div class="" style="font-size: 14px;">
-                                                        <small>Eff: <%= main_dashboard[i].feed[j].msg2 %>%</small>
-                                                    </div>
-                                                    <% } %>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>    
-                                    </div>
-                                    <div class="col-md-6">
-                                    <% for(let i=0;i<main_dashboard.length;i++) { %>
-                                        <% if(main_dashboard[i].feed) { %>
-                                            <% for(let j=0;j<main_dashboard[i].feed.length;j++){ %>
-                                                <% if(main_dashboard[i].feed[j].type == 'BinningDay') { %>
-                                                    <% if(metaData.ost[x].name == main_dashboard[i].feed[j].ost) { %>
-                                                    <div class="pull-right" style="font-size: 14px;">
-                                                        <small>NE: <%= main_dashboard[i].feed[j].msg1 %>%</small>
-                                                    </div>
-                                                    <% } %>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <% } %>
-                <% } %>
-            </div>
-
         </section>
         <!-- /.content -->
     </div>
