@@ -1249,8 +1249,11 @@ module.exports = function(app){
                                         for(let i=0; i<main_dashboard.length;i++){
                                             for(let j=0; j<main_dashboard[i].feed.length;j++){
                                                 if(main_dashboard[i].feed[j].type == 'BinningDay'){
-                                                    sumQTY += parseFloat(main_dashboard[i].feed[j].binning_qty) // binning qty
-                                                    sumTOTAL += parseFloat(main_dashboard[i].feed[j].binning_total) // total
+                                                    if(main_dashboard[i].feed[j].binning_qty > 1){
+                                                        sumQTY += parseFloat(main_dashboard[i].feed[j].binning_qty) // binning qty
+                                                        sumTOTAL += parseFloat(main_dashboard[i].feed[j].binning_total) // total
+                                                        //sumTOTAL++;
+                                                    }
                                                 }
                                             }
                                         }
@@ -1266,16 +1269,20 @@ module.exports = function(app){
                                     return new Promise(function(resolve, reject){
 
                                         let sum = 0;
+                                        let divisor = 0;
 
                                         for(let i=0; i<main_dashboard.length;i++){
                                             for(let j=0; j<main_dashboard[i].feed.length;j++){
                                                 if(main_dashboard[i].feed[j].type == 'CosmeticsDay'){
-                                                    sum += parseFloat(main_dashboard[i].feed[j].msg1) // 1st message
+                                                    if(main_dashboard[1].feed[j].msg1 > 20){
+                                                        sum += parseFloat(main_dashboard[i].feed[j].msg1) // 1st message
+                                                        divisor++;
+                                                    }
                                                 }
                                             }
                                         }
         
-                                        let cosmetics_avg = sum/5; // ost 1-5 ave
+                                        let cosmetics_avg = sum/divisor; // 
                                         
                                         resolve(cosmetics_avg.toFixed(0));
 
