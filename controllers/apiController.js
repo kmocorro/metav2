@@ -1274,7 +1274,7 @@ module.exports = function(app){
                                         for(let i=0; i<main_dashboard.length;i++){
                                             for(let j=0; j<main_dashboard[i].feed.length;j++){
                                                 if(main_dashboard[i].feed[j].type == 'CosmeticsDay'){
-                                                    if(main_dashboard[1].feed[j].msg1 > 20){
+                                                    if(main_dashboard[i].feed[j].msg1 > 20){
                                                         sum += parseFloat(main_dashboard[i].feed[j].msg1) // 1st message
                                                         divisor++;
                                                     }
@@ -1283,6 +1283,7 @@ module.exports = function(app){
                                         }
         
                                         let cosmetics_avg = sum/divisor; // 
+                                        console.log(cosmetics_avg);
                                         
                                         resolve(cosmetics_avg.toFixed(0));
 
