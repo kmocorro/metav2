@@ -709,6 +709,7 @@ module.exports = function(app){
                             
                         }
 
+                        /*
                         for(let i=0; i<metaData.process.length; i++){
                             if(metaData.process[i].to){
                                 wipPerProcess.push(
@@ -721,6 +722,7 @@ module.exports = function(app){
                                 );
                             }
                         }
+                        */
                         
                         let toGo = {
                             feed: feed_to_display,
@@ -748,11 +750,11 @@ module.exports = function(app){
             read_lot_list().then(function(toGo){
 
                 let feed = toGo.feed;
-                let wip = toGo.wip;
+                //let wip = toGo.wip;
 
                 let expireDate = moment('2018-09-27 11:00:00').fromNow();
 
-                res.render('lot', {feed, wip, metaData, expireDate});
+                res.render('lot', {feed, metaData, expireDate});
                 //console.log(feed);
                 //res.send('This app is already expired. We will get back to you later.');
 
